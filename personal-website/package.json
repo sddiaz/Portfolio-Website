@@ -12,8 +12,11 @@
     "@testing-library/user-event": "^13.5.0",
     "gsap": "^3.12.4",
     "react": "^18.2.0",
+    "react-awesome-shapes": "^0.1.12",
     "react-dom": "^18.2.0",
+    "react-parallax-tilt": "^1.7.181",
     "react-scripts": "5.0.1",
+    "sass": "^1.69.7",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

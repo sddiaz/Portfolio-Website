@@ -1,22 +1,36 @@
 import './App.css';
+import './styles/ParallaxEffect.scss'
 import Avatar from '@mui/material/Avatar';
 import gsap from "gsap";
 import { useState, useLayoutEffect, useRef, useEffect } from 'react';
-
+import { CircleGrid } from "react-awesome-shapes/dist/shapes/circlegrid";
+import { Circle } from 'react-awesome-shapes/dist/shapes/circle';
+import { Diamond } from "react-awesome-shapes/dist/shapes/diamond";
+import Tilt from 'react-parallax-tilt';
 
 function App() {
   
   // Variables
 
+  const [programFlip, setProgramFlip] = useState(false)
+  const [aboutToggle, setAboutToggle] = useState(true);
   const [isHovered, setIsHovering] = useState(false); 
   const composition = useRef(null); 
 
-  // Animation Timeline
+
   useLayoutEffect(() => {
+
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant', // Set behavior to 'auto' for instant scroll
+    });
+
     let ctx = gsap.context(() => {
+    
       const timeline = gsap.timeline()
-      timeline.from("#card", {
-        delay: 0.3,
+      timeline.from(["#card", "#navbar"], {
+        delay: 0.8,
         duration: 1,
         opacity: 0,
         y: "+=30",
@@ -28,21 +42,16 @@ function App() {
         opacity: 0,
         y: "+=30",
         stagger: 0.2
+      }).from(["#button-1", "#button-2", "#button-3", "#shape-1", "#shape-2", "#shape-3"], {
+        opacity: 0,
+        x: "-=30",
+        stagger: 0.2
       })
+    
     }, composition);
+
     return () => ctx.revert();
-  }, []);
 
-  useEffect(() => {
-    const inviteElement = document.querySelector('.invite');
-
-    const fadeInTimeout = setTimeout(() => {
-      inviteElement.classList.add('fade-in');
-    }, 2000); // 2000 milliseconds = 2 seconds
-
-    return () => {
-      clearTimeout(fadeInTimeout);
-    };
   }, []);
 
   const handleProfileClick = () => {
@@ -56,123 +65,264 @@ function App() {
     setIsHovering(false); 
   }
 
-  const handleScroll = (e) => {
+  const aboutScroll = (e) => {
     document.querySelector('#About').scrollIntoView({
       behavior: 'smooth',
     });
   };
 
+  const workScroll = (e) => {
+    document.querySelector('#Work').scrollIntoView({
+      behavior: 'smooth',
+    });
+  };
+
+  const contactScroll = (e) => {
+    document.querySelector('#Contact').scrollIntoView({
+      behavior: 'smooth',
+    });
+  };
+
+  const handleToggle = () => {
+    setAboutToggle(!aboutToggle);
+  };
+
+  const handleProgramFlip = () => {
+    setProgramFlip(!programFlip);
+  }
+
   return (
     <div className="App" ref={composition}>
-      <div className="title v">
-        <div>
+      <div className="title">
+        <div id="navbar" className="navbar">
+          <div id="button-1" className="navComponent" >
+            <button onClick={aboutScroll} id="aboutBtn" class="btn">About</button>
+          </div>
+          <div id="button-2" className="navComponent">
+            <button  onClick={workScroll} id="workBtn" class="btn">Work</button>
+          </div>
+          <div id="button-3" className="navComponent">
+            <button  onClick={contactScroll} id="contactBtn" class="btn">Contact</button>
+          </div>
         </div>
         <div className="backgroundSheet">
           <div className="backgroundCircle"/>
         </div>
-        <div className="titleCard">
-          <div id="card">
-            <div className="titleCard--border" >
-              <div className="squares">
-                <div className="square1"/>
-                <div className="square2"/>
-                <div className="square3"/>
+        <div className="middle">
+          <div className="shapeWrapper">
+            <div id="card" className="shapes">
+              <div id="shape-1">
+                <Diamond 
+                    color="linear-gradient(135deg, #93c5fd, #3b82f6)"
+                    size="10px"
+                    zIndex={2}
+                />
               </div>
-              <div className="titleCard--top">
-                <div className="titleCard--top--text">
-                  <div>
-                    <div id="intro-text">
-                      Hello ! 👋 I'm Santiago.  
-                    </div>
-                    <div id="sub-1" className="titleCard--top--subText">
-                    Software Engineer
-                    </div>
-                    <div id="sub-2" className="titleCard--top--subText">
-                    Digital Artist
-                    </div>
-                    <div id="sub-3" className="titleCard--top--subText">
-                    Video Game Enthusiast
-                    </div>
-                  </div>        
-                </div>
-                <div id="image" onClick={handleProfileClick} className="titleCard--top--image" 
-                onMouseEnter={handleHover}
-                onMouseLeave={handleLeave}>
-                  <Avatar
-                    alt="Santiago Diaz"
-                    src="/static/images/headshot_color.jpg"
-                    sx={{
-                      border: "1px solid var(--wildCard)",
-                      width: 200,
-                      height: 200,
-                      opacity: isHovered ? 1 : 0,
-                      position: 'absolute',
-                      zIndex: isHovered ? 2 : 1,
-                      transition: 'opacity 1s, z-index 0.3s',
-                      '@media (max-width: 600px)': {
-                        width: 150,
-                        height: 150,
-                      },
-                      '@media (min-width: 601px) and (max-width: 1200px)': {
-                        width: 'calc(150px + 15 * ((100vw - 600px) / 600))', // Adjust this formula as needed
-                        height: 'calc(150px + 15 * ((100vw - 600px) / 600))',
-                      },
-                      '@media (min-width: 1201px)': {
-                        width: 250,
-                        height: 250,
-                      },
-                    }}
-                  />
-                  <Avatar
-                    alt="Santiago Diaz"
-                    src="/static/images/headshot.jpg"
-                    sx={{
-                      width: 200,
-                      height: 200,
-                      opacity: isHovered ? 0 : 1,
-                      zIndex: isHovered ? 1 : 2,
-                      transition: 'opacity 1s, z-index 0.3s',
-                      '@media (max-width: 600px)': {
-                        width: 150,
-                        height: 150,
-                      },
-                      '@media (min-width: 601px) and (max-width: 1200px)': {
-                        width: 'calc(150px + 15 * ((100vw - 600px) / 600))', // Adjust this formula as needed
-                        height: 'calc(150px + 15 * ((100vw - 600px) / 600))',
-                      },
-                      '@media (min-width: 1201px)': {
-                        width: 250,
-                        height: 250,
-                      },
-                    }}
-                  />
-                </div>
+              <div id="shape-2">
+              <Circle
+                  color="linear-gradient(135deg, #fff, #d062ff)"
+                  size={['15px', '15px', '18px', '18px']}
+                  zIndex={2}
+              />
               </div>
-              <div className="circles">
-                <div className="circle1 circle" />
-                <div className="circle2 circle" />
-                <div className="circle3 circle" />
+              <div id="shape-3">
+                <Diamond
+                    color="linear-gradient(135deg, #93c5fd, #3b82f6)"
+                    size="10px"
+                    zIndex={2}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="titleCard">
+            <div id="card">
+              <div className="titleCard--border" >
+                <div className="squares">
+                  <div className="square1"/>
+                  <div className="square2"/>
+                  <div className="square3"/>
+                </div>
+                <div className="titleCard--top">
+                  <div className="titleCard--top--text">
+                    <div>
+                      <div id="intro-text">
+                        Hello ! 👋 I'm Santiago.  
+                      </div>
+                      <div id="sub-1" className="titleCard--top--subText">
+                      Software Engineer
+                      </div>
+                      <div id="sub-2" className="titleCard--top--subText">
+                      Digital Artist
+                      </div>
+                      <div id="sub-3" className="titleCard--top--subText">
+                      Life-long Learner 
+                      </div>
+                    </div>        
+                  </div>
+                  <div id="image" onClick={handleProfileClick} className="titleCard--top--image" 
+                  onMouseEnter={handleHover}
+                  onMouseLeave={handleLeave}>
+                    <Avatar
+                      alt="Santiago Diaz"
+                      src="/static/images/headshot_color.jpg"
+                      sx={{
+                        border: "1px solid var(--wildCard)",
+                        width: 200,
+                        height: 200,
+                        opacity: isHovered ? 1 : 0,
+                        position: 'absolute',
+                        zIndex: isHovered ? 2 : 1,
+                        transition: 'opacity 1s, z-index 0.3s',
+                        '@media (max-width: 600px)': {
+                          width: 150,
+                          height: 150,
+                        },
+                        '@media (min-width: 601px) and (max-width: 1200px)': {
+                          width: 'calc(150px + 15 * ((100vw - 600px) / 600))', // Adjust this formula as needed
+                          height: 'calc(150px + 15 * ((100vw - 600px) / 600))',
+                        },
+                        '@media (min-width: 1201px)': {
+                          width: 250,
+                          height: 250,
+                        },
+                      }}
+                    />
+                    <Avatar
+                      alt="Santiago Diaz"
+                      src="/static/images/headshot.jpg"
+                      sx={{
+                        width: 200,
+                        height: 200,
+                        opacity: isHovered ? 0 : 1,
+                        zIndex: isHovered ? 1 : 2,
+                        transition: 'opacity 1s, z-index 0.3s',
+                        '@media (max-width: 600px)': {
+                          width: 150,
+                          height: 150,
+                        },
+                        '@media (min-width: 601px) and (max-width: 1200px)': {
+                          width: 'calc(150px + 15 * ((100vw - 600px) / 600))', // Adjust this formula as needed
+                          height: 'calc(150px + 15 * ((100vw - 600px) / 600))',
+                        },
+                        '@media (min-width: 1201px)': {
+                          width: 250,
+                          height: 250,
+                        },
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className="circles">
+                  <div className="circle1 circle" />
+                  <div className="circle2 circle" />
+                  <div className="circle3 circle" />
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div className="invite" >
           Learn More
-          <img onClick={handleScroll} className="invite--scroll" src="/static/images/mouse-cursor.png"
+          <img onClick={aboutScroll} className="invite--scroll" src="/static/images/mouse-cursor.png"
           ></img>
         </div>
       </div>
       <div id="About" className="Page"> 
        <div className="Who pageTitle">
+        <div className="aboutTitle">
           About <div className="regular">me</div>
+        </div>
+        <div className="aboutPage">
+            <div className="aboutToggleSection">
+              <div onClick={handleToggle} className="aboutToggle">
+                    <div className={aboutToggle ? "aboutToggleSelected" : "aboutToggleUnselected"}>
+                      Biography
+                    </div>
+                    <div className={!aboutToggle ? "aboutToggleSelected" : "aboutToggleUnselected"}>
+                      Passions
+                    </div>
+              </div>
+            </div>
+            <div className="aboutSections">
+                {aboutToggle && 
+                <div className="storyPage">
+                  Here's a brief biography
+                </div>}
+                {!aboutToggle && 
+                <div className="passionsPage">
+                  <div className="passionRow">
+                    <div className="aboutPassion">
+                        <Tilt
+                        onClick={handleProgramFlip}
+                        flipHorizontally={programFlip}
+                        className="parallax-effect-glare-scale programming"
+                        glarePosition='all'
+                        perspective={1000}
+                        glareEnable={true}
+                        glareMaxOpacity={0.45}
+                        scale={1.05}
+                      >
+                        <div className="inner-element">
+                          <div>Programming</div>
+                        </div>
+                        </Tilt>
+                    </div>
+                    <div className="aboutPassion">
+                        <Tilt
+                        className="parallax-effect-glare-scale art"
+                        glarePosition='all'
+                        perspective={1000}
+                        glareEnable={true}
+                        glareMaxOpacity={0.45}
+                        scale={1.05}
+                      >
+                        <div className="inner-element">
+                          <div>Digital Art</div>
+                        </div>
+                        </Tilt>
+                    </div>
+                  </div>
+                  <div className="passionRow">
+                    <div className="aboutPassion">
+                        <Tilt
+                        className="parallax-effect-glare-scale travel"
+                        glarePosition='all'
+                        perspective={1000}
+                        glareEnable={true}
+                        glareMaxOpacity={0.45}
+                        scale={1.05}
+                      >
+                        <div className="inner-element">
+                          <div>Travel</div>
+                        </div>
+                        </Tilt>
+                    </div>
+                    <div className="aboutPassion">
+                        <Tilt
+                        className="parallax-effect-glare-scale film"
+                        glarePosition='all'
+                        perspective={1000}
+                        glareEnable={true}
+                        glareMaxOpacity={0.45}
+                        scale={1.05}
+                      >
+                        <div className="inner-element">
+                          <div>Film</div>
+                        </div>
+                        </Tilt>
+                    </div>
+                  </div>
+                </div>}
+            </div>
+        </div>
        </div>
       </div>
-      <div className="Page"> 
+      <div id="Work" className="Page"> 
        <div className="What pageTitle">
           Work <div className="regular"> and </div> Skills
        </div>
       </div>
-      <div className="Page"> 
+      <div id="Contact" className="Page"> 
        <div className="Where pageTitle">
           Say Hi
        </div>

@@ -2,21 +2,33 @@ import './App.css';
 import './styles/ParallaxEffect.scss'
 import Avatar from '@mui/material/Avatar';
 import gsap from "gsap";
-import { useState, useLayoutEffect, useRef, useEffect } from 'react';
-import { CircleGrid } from "react-awesome-shapes/dist/shapes/circlegrid";
+import React, { useState, useLayoutEffect, useRef } from 'react';
 import { Circle } from 'react-awesome-shapes/dist/shapes/circle';
 import { Diamond } from "react-awesome-shapes/dist/shapes/diamond";
 import Tilt from 'react-parallax-tilt';
-
+import EarthScene from './Scenes/EarthScene';
+import SatelliteScene from './Scenes/SatelliteScene';
+import UfoScene from './Scenes/UfoScene';
+// import { Menu, MenuItem } from '@mui/material';
 function App() {
-  
+
   // Variables
 
   const [programFlip, setProgramFlip] = useState(false)
   const [aboutToggle, setAboutToggle] = useState(true);
-  const [isHovered, setIsHovering] = useState(false); 
-  const composition = useRef(null); 
+  const [isHovered, setIsHovering] = useState(false);
+  const composition = useRef(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
+
+  // Animations
 
   useLayoutEffect(() => {
 
@@ -27,7 +39,7 @@ function App() {
     });
 
     let ctx = gsap.context(() => {
-    
+
       const timeline = gsap.timeline()
       timeline.from(["#card", "#navbar"], {
         delay: 0.8,
@@ -46,8 +58,21 @@ function App() {
         opacity: 0,
         x: "-=30",
         stagger: 0.2
+      }).from("#sceneTitle", {
+        opacity: 0,
+        y: "+=30",
+        stagger: 0.2
+      }).from("#scene", {
+        opacity: 0,
+        y: "+=30",
+        stagger: 0.2
       })
-    
+      .from(["#earth", "#invite"], {
+        opacity: 0,
+        y: "+=30",
+        stagger: 0.2
+      })
+
     }, composition);
 
     return () => ctx.revert();
@@ -58,11 +83,11 @@ function App() {
     window.open('https://www.linkedin.com/in/santiagoddiaz', '_blank');
   }
   const handleHover = () => {
-    setIsHovering(true); 
+    setIsHovering(true);
   }
 
   const handleLeave = () => {
-    setIsHovering(false); 
+    setIsHovering(false);
   }
 
   const aboutScroll = (e) => {
@@ -95,6 +120,23 @@ function App() {
     <div className="App" ref={composition}>
       <div className="title">
         <div id="navbar" className="navbar">
+          <div id="bigButton" className="navComponentBig" >
+            <button onClick={handleClick} id="aboutBtn" class="btn">
+            </button>
+            {/* <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                'aria-labelledby': 'basic-button',
+              }}
+            >
+              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <MenuItem onClick={handleClose}>My account</MenuItem>
+              <MenuItem onClick={handleClose}>Logout</MenuItem>
+            </Menu> */}
+          </div>
           <div id="button-1" className="navComponent" >
             <button onClick={aboutScroll} id="aboutBtn" class="btn">About</button>
           </div>
@@ -112,7 +154,7 @@ function App() {
           <div className="shapeWrapper">
             <div id="card" className="shapes">
               <div id="shape-1">
-                <Diamond 
+                <Diamond
                     color="linear-gradient(135deg, #93c5fd, #3b82f6)"
                     size="10px"
                     zIndex={2}
@@ -146,7 +188,7 @@ function App() {
                   <div className="titleCard--top--text">
                     <div>
                       <div id="intro-text">
-                        Hello ! 👋 I'm Santiago.  
+                        Hello ! 👋 I'm Santiago.
                       </div>
                       <div id="sub-1" className="titleCard--top--subText">
                       Software Engineer
@@ -155,11 +197,11 @@ function App() {
                       Digital Artist
                       </div>
                       <div id="sub-3" className="titleCard--top--subText">
-                      Life-long Learner 
+                      Life-long Learner
                       </div>
-                    </div>        
+                    </div>
                   </div>
-                  <div id="image" onClick={handleProfileClick} className="titleCard--top--image" 
+                  <div id="image" onClick={handleProfileClick} className="titleCard--top--image"
                   onMouseEnter={handleHover}
                   onMouseLeave={handleLeave}>
                     <Avatar
@@ -220,14 +262,23 @@ function App() {
               </div>
             </div>
           </div>
+          <div id="sceneTitle" className="titleCard--top" style={{filter: 'drop-shadow(2px 2px 0px #000000)', marginTop: '25px', fontSize: '25px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+             I want to make an <span className="highlight Impact">impact </span> on our <span className="highlight World">world </span> with  <span className="highlight Tech">tech</span>.
+          </div>
+          <div id="earth" className="ThreeJsScenes">
+            <SatelliteScene className="satellite"/>
+            <EarthScene id="earth" className="earth"/>
+            <UfoScene className="ufo"/>
+            <div/>
+          </div>
         </div>
-        <div className="invite" >
+        <div id="invite" className="invite" >
           Learn More
-          <img onClick={aboutScroll} className="invite--scroll" src="/static/images/mouse-cursor.png"
+          <img alt='' onClick={aboutScroll} className="invite--scroll" src="/static/images/mouse-cursor.png"
           ></img>
         </div>
       </div>
-      <div id="About" className="Page"> 
+      <div id="About" className="Page">
        <div className="Who pageTitle">
         <div className="aboutTitle">
           About <div className="regular">me</div>
@@ -244,11 +295,11 @@ function App() {
               </div>
             </div>
             <div className="aboutSections">
-                {aboutToggle && 
+                {aboutToggle &&
                 <div className="storyPage">
                   Here's a brief biography
                 </div>}
-                {!aboutToggle && 
+                {!aboutToggle &&
                 <div className="passionsPage">
                   <div className="passionRow">
                     <div className="aboutPassion">
@@ -317,12 +368,12 @@ function App() {
         </div>
        </div>
       </div>
-      <div id="Work" className="Page"> 
+      <div id="Work" className="Page">
        <div className="What pageTitle">
           Work <div className="regular"> and </div> Skills
        </div>
       </div>
-      <div id="Contact" className="Page"> 
+      <div id="Contact" className="Page">
        <div className="Where pageTitle">
           Say Hi
        </div>

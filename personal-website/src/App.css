@@ -80,6 +80,19 @@ html {
   align-items: center;
   border-radius: 100px;
 }
+.navComponentBig {
+  display: none; 
+  color: var(--mainText);
+  font-family: title;
+  display: flex;
+  justify-content: center;
+  border-radius: 100px;
+  width: 0%;
+}
+.navComponentBig > * {
+  display: none;
+  width: 0%;
+}
 .navComponent {
   color: var(--mainText);
   font-family: title;
@@ -91,8 +104,8 @@ html {
 .btn {
   color: var(--background);
   font-family: title;
-  font-size: 15px;
-  width: 170px;
+  font-size: clamp(10px, 3vw, 22px);
+  width: clamp(15vw, 33vw, 10vw);
   height: 60px;
   background: var(--rootBackground);
   border: none;
@@ -220,10 +233,11 @@ html {
   background: var(--background);
   padding: 10px 20px;
   border-radius: 5px;
-  cursor: pointer;
   font-size: 18px;
+  margin-top: 50px;
 }
 .invite--scroll {
+  cursor: pointer;
   margin-top: 10px;
   width: 30px;
   height: 30px;
@@ -262,6 +276,119 @@ html {
   border-radius: 50%;
   background: var(--accent);
 }
+.highlight {
+  position: relative;
+  margin: 0px 7px;
+}
+.highlight:after {
+  content: " "; 
+  height: 30%; 
+  position: absolute; 
+  left: 0; 
+  top: 60%; 
+  width: calc(100%);
+  z-index: -1; 
+}
+.Impact:after {
+  background-color: var(--accentDark);
+}
+.World:after {
+  background-color: var(--wildCard);
+}
+.Tech:after {
+  background-color: lightseagreen;
+}
+.ThreeJsScenes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+}
+.scene--earth {
+  position: relative;
+  margin-top: -50px;
+  height: 50vh;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.scene--ufo {
+  position: relative;
+  margin-top: -50px;
+  height: 50vh;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.scene--satellite {
+  position: relative;
+  margin-top: -50px;
+  height: 50vh;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.earthShape {
+  z-index: -1;
+  position: absolute;
+}
+.earthCircleBase {
+  border-radius: 50%;
+  z-index: -1;
+  margin-top: 120px;
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: linear-gradient(45deg, var(--wildCard), #0000ff, var(--accent));
+  background-size: 1000% 200%;
+  animation: scrollBackground 5s linear infinite;
+  animation: glow 2s;
+}
+.earthCircleMid {
+  border-radius: 50%;
+  z-index: -0.3;
+  margin-top: 120px;
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background-color: var(--rootBackground);
+  clip-path: circle(40.4% at 100% 100%);
+}
+.earthCircleTop {
+  border-radius: 50%;
+  z-index: -0.3;
+  margin-top: 120px;
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background-color: var(--accentDark);
+  clip-path: circle(30.7% at 0 0);
+}
+.ufoCircles {
+  z-index: -1;
+  margin-top: 0px;
+  position: absolute;
+  width: 250px;
+  height: 250px;
+}
+.satelliteCircle {
+  z-index: -1;
+  margin-top: 0px;
+  position: absolute;
+}
+
+.satellite {
+
+}
+.ufo {
+
+}
+
+
 
 /* Generic Page */
 .Page {
@@ -393,7 +520,6 @@ html {
   font-family: title;
   color: var(--accent);
   border-radius: 50% !important;
-  height: 100vh;
 }
 
 /* Animations */
@@ -443,13 +569,36 @@ html {
 }
 
 /* Media Query */
-
 @media (max-width: 1080px) {
-
-    .aboutPassion {
-      margin: 25px 0px;
-    }
-    .passionRow {
-      flex-direction: column;
-    }
+  .navComponent {
+    display: none; 
+  }
+  .navComponentBig {
+    display: flex; 
+    width: 33%;
+  }
+  .navComponentBig > * {
+    display: inline;
+    width: 33%;
+  }
+  .scene--satellite {
+    display: none;
+  }
+  .scene--ufo {
+    display: none;
+  }
+  .ThreeJsScenes {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .aboutPassion {
+    margin: 25px 0px;
+  }
+  .passionRow {
+    flex-direction: column;
+  }
+  .earthShape {
+    height: 400px;
+  }
 }

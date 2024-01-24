@@ -9,7 +9,10 @@ import Tilt from 'react-parallax-tilt';
 import EarthScene from './Scenes/EarthScene';
 import SatelliteScene from './Scenes/SatelliteScene';
 import UfoScene from './Scenes/UfoScene';
-// import { Menu, MenuItem } from '@mui/material';
+import Menu  from '@mui/material/Menu';
+import MenuItem  from '@mui/material/MenuItem';
+import { ArrowCircleDown } from '@mui/icons-material';
+
 function App() {
 
   // Variables
@@ -94,18 +97,21 @@ function App() {
     document.querySelector('#About').scrollIntoView({
       behavior: 'smooth',
     });
+    setAnchorEl(null);
   };
 
   const workScroll = (e) => {
     document.querySelector('#Work').scrollIntoView({
       behavior: 'smooth',
     });
+    setAnchorEl(null);
   };
 
   const contactScroll = (e) => {
     document.querySelector('#Contact').scrollIntoView({
       behavior: 'smooth',
     });
+    setAnchorEl(null);
   };
 
   const handleToggle = () => {
@@ -115,15 +121,18 @@ function App() {
   const handleProgramFlip = () => {
     setProgramFlip(!programFlip);
   }
+  
 
   return (
     <div className="App" ref={composition}>
       <div className="title">
         <div id="navbar" className="navbar">
           <div id="bigButton" className="navComponentBig" >
-            <button onClick={handleClick} id="aboutBtn" class="btn">
+            <button style={{fontSize: '25px', width: '25vw'}} className={open ? "btn btnActive" : "btn"} onClick={handleClick} id="aboutBtn" class="btn">
+            Menu ≡
             </button>
-            {/* <Menu
+            <Menu
+              
               id="basic-menu"
               anchorEl={anchorEl}
               open={open}
@@ -131,11 +140,12 @@ function App() {
               MenuListProps={{
                 'aria-labelledby': 'basic-button',
               }}
+              sx={{background: 'rgba(0,0,0,0.3)'}}
             >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
-            </Menu> */}
+              <MenuItem className='menuItem' onClick={aboutScroll}>About Me</MenuItem>
+              <MenuItem className='menuItem' onClick={workScroll}>My Work</MenuItem>
+              <MenuItem className='menuItem' onClick={contactScroll}>Get in Touch</MenuItem>
+            </Menu>
           </div>
           <div id="button-1" className="navComponent" >
             <button onClick={aboutScroll} id="aboutBtn" class="btn">About</button>
@@ -151,6 +161,7 @@ function App() {
           <div className="backgroundCircle"/>
         </div>
         <div className="middle">
+          <div className="titleCard">
           <div className="shapeWrapper">
             <div id="card" className="shapes">
               <div id="shape-1">
@@ -176,7 +187,6 @@ function App() {
               </div>
             </div>
           </div>
-          <div className="titleCard">
             <div id="card">
               <div className="titleCard--border" >
                 <div className="squares">
@@ -262,14 +272,13 @@ function App() {
               </div>
             </div>
           </div>
-          <div id="sceneTitle" className="titleCard--top" style={{filter: 'drop-shadow(2px 2px 0px #000000)', marginTop: '25px', fontSize: '25px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-             I want to make an <span className="highlight Impact">impact </span> on our <span className="highlight World">world </span> with  <span className="highlight Tech">tech</span>.
+          <div id="sceneTitle" className="impactCard" style={{filter: 'drop-shadow(2px 2px 0px #000000)', marginTop: '25px', fontSize: '25px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+             I want to make an <span className="highlight Impact">impact </span> on our <span className="highlight World">world </span> with  <span className="highlight Tech">tech.</span>
           </div>
           <div id="earth" className="ThreeJsScenes">
             <SatelliteScene className="satellite"/>
             <EarthScene id="earth" className="earth"/>
             <UfoScene className="ufo"/>
-            <div/>
           </div>
         </div>
         <div id="invite" className="invite" >

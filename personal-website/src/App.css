@@ -93,6 +93,29 @@ html {
   display: none;
   width: 0%;
 }
+.MuiMenu-paper {
+  background: none !important;
+  border: none !important; 
+  box-shadow: none !important;
+  width: 25%;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+.menuItem {
+  background: var(--rootBackground) !important;
+  transition: 0.3s !important;  
+  margin: 10px 0px !important;
+  box-shadow: 3px 3px 0px 0px var(--wildCard) !important;
+  font-weight: bolder !important;
+  border-radius: 15px !important;
+  font-size: clamp(10px, 3vw, 20px) !important;
+}
+.menuItem:hover {
+  background: #073b4c !important;
+  color: #fff !important;
+  box-shadow: 3px 3px 0px 0px var(--accent) !important;
+}
 .navComponent {
   color: var(--mainText);
   font-family: title;
@@ -104,9 +127,11 @@ html {
 .btn {
   color: var(--background);
   font-family: title;
-  font-size: clamp(10px, 3vw, 22px);
-  width: clamp(15vw, 33vw, 10vw);
-  height: 60px;
+  margin-top: 25px  !important;
+  margin-bottom: 15px !important;
+  height: clamp(30px, 4vw, 40px)  !important;
+  font-size: clamp(10px, 2vw, 20px) !important;
+  width: 15vw;
   background: var(--rootBackground);
   border: none;
   border-radius: 50px;
@@ -115,7 +140,15 @@ html {
   transition: all 0.4s;
   box-shadow: 7px 5px 0px 0px var(--accent);
 }
-
+.btnActive {
+  box-shadow:  0px 0px 0px 0px var(--accent),
+  inset 0 0 0 4px #ef476f, 
+  inset 0 0 0 8px #d062ff, 
+  inset 0 0 0 12px #06d6a0,
+  inset 0 0 0 16px #118ab2 !important;
+  background: #073b4c;
+  color: #fff;
+}
 .btn:hover {
   box-shadow:  0px 0px 0px 0px var(--accent),
               inset 0 0 0 4px #ef476f, 
@@ -126,7 +159,7 @@ html {
   color: #fff;
 }
 .middle {
-  height: 75%;
+  height: 77%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -154,23 +187,12 @@ html {
   background: var(--accent);
 }
 .titleCard {
+  margin-top: 100px;
   font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-.titleCard--letters {
-  font-size: 35px; 
-  transition: 0.1s; 
-}
-.titleCard--letters:hover {
-  display:inline-block;
-  -webkit-transform:scale(1.25,1); /* Safari and Chrome */
-  -moz-transform:scale(1.25,1); /* Firefox */
-  -ms-transform:scale(1.25,1); /* IE 9 */
-  transform:scale(1.25,1); /* W3C */
-  color: #8b82ff;
 }
 .titleCard--border {
   position: relative;
@@ -206,11 +228,16 @@ html {
 .titleCard--top--text {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
+}
+#intro-text {
+  max-width: 1000px;
+  width: 44vw;
 }
 .titleCard--top--subText {
   color: var(--accent);
-  font-size: 20px;
+  font-size: clamp(10px, 2vw, 20px);
 }
 .titleCard--inviteBorder {
   display: flex;
@@ -262,7 +289,6 @@ html {
 .circle1:hover {
   transform: scale(1.1);
 }
-
 .circle2 {
   height: 15px;
   width: 15px;
@@ -313,6 +339,10 @@ html {
   align-items: center;
   flex-direction: column;
 }
+.earthCanvas {
+  height: 50vw !important;
+  width: 50vw !important; 
+}
 .scene--ufo {
   position: relative;
   margin-top: -50px;
@@ -331,61 +361,33 @@ html {
   align-items: center;
   flex-direction: column;
 }
-
 .earthShape {
+  max-height: 600px;
+  height: 40vh;
   z-index: -1;
   position: absolute;
-}
-.earthCircleBase {
-  border-radius: 50%;
-  z-index: -1;
-  margin-top: 120px;
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  background: linear-gradient(45deg, var(--wildCard), #0000ff, var(--accent));
-  background-size: 1000% 200%;
-  animation: scrollBackground 5s linear infinite;
-  animation: glow 2s;
-}
-.earthCircleMid {
-  border-radius: 50%;
-  z-index: -0.3;
-  margin-top: 120px;
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  background-color: var(--rootBackground);
-  clip-path: circle(40.4% at 100% 100%);
-}
-.earthCircleTop {
-  border-radius: 50%;
-  z-index: -0.3;
-  margin-top: 120px;
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  background-color: var(--accentDark);
-  clip-path: circle(30.7% at 0 0);
 }
 .ufoCircles {
   z-index: -1;
   margin-top: 0px;
   position: absolute;
-  width: 250px;
-  height: 250px;
+  max-height: 350px;
+  height: 25vh;
 }
 .satelliteCircle {
   z-index: -1;
   margin-top: 0px;
   position: absolute;
+  max-height: 350px;
+  height: 25vh;
 }
-
-.satellite {
-
-}
-.ufo {
-
+.impactCard {
+  display: flex;
+  justify-content: space-between;
+  font-size: 30px;
+  font-weight: bold;
+  color: var(--mainText);
+  font-family: title;
 }
 
 
@@ -569,7 +571,17 @@ html {
 }
 
 /* Media Query */
-@media (max-width: 1080px) {
+@media (max-width: 1080px) or (max-height: 1079px) {
+  .btn {
+    width: 33vw !important;
+    margin: 0px !important;
+    height: clamp(30px, 5vw, 60px)  !important;
+    font-size: clamp(15px, 3vw, 25px) !important;
+  }
+  .titleCard {
+    margin: 0px !important;
+    width: 30vw;
+  }
   .navComponent {
     display: none; 
   }
@@ -588,9 +600,12 @@ html {
     display: none;
   }
   .ThreeJsScenes {
+    height: 40vh;
+    width: 50vw;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin: 0px !important;
   }
   .aboutPassion {
     margin: 25px 0px;
@@ -598,7 +613,23 @@ html {
   .passionRow {
     flex-direction: column;
   }
+  .earthCanvas {
+    height: 100vw !important;
+  }
   .earthShape {
-    height: 400px;
+    max-width: 90vw;
+    height: 30vh;
+  }
+  .invite {
+    margin: 0px;
+  }
+  .impactCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3vw !important; 
+  }
+  .backgroundCircle {
+    border-radius: 25%;
   }
 }

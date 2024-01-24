@@ -21,7 +21,7 @@ const EarthScene = () => {
 
   return (
     <div className="scene--earth">
-      <Canvas style={{ zIndex: '3', width: '600px', height: earthSize.height }} shadows>
+      <Canvas className="earthCanvas" style={{ zIndex: '3'}} shadows>
         <OrbitControls
           autoRotate
           autoRotateSpeed={0.9}

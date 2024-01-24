@@ -2,7 +2,7 @@ import './App.css';
 import './styles/ParallaxEffect.scss'
 import Avatar from '@mui/material/Avatar';
 import gsap from "gsap";
-import React, { useState, useLayoutEffect, useRef } from 'react';
+import React, { useState, useLayoutEffect, useRef, useEffect } from 'react';
 import { Circle } from 'react-awesome-shapes/dist/shapes/circle';
 import { Diamond } from "react-awesome-shapes/dist/shapes/diamond";
 import Tilt from 'react-parallax-tilt';
@@ -32,7 +32,6 @@ function App() {
 
 
   // Animations
-
   useLayoutEffect(() => {
 
     window.scrollTo({
@@ -92,6 +91,32 @@ function App() {
   const handleLeave = () => {
     setIsHovering(false);
   }
+  // Custom Cursor
+  useEffect(() => {
+      const cursor = document.getElementById('cursor');
+      const littleCursor = document.getElementById('littleCursor');
+
+      document.addEventListener('mousemove', function(e) {
+      cursor.style.left = e.clientX + 'px'; 
+      cursor.style.top = e.clientY + 'px'; 
+      littleCursor.style.left = e.clientX + 'px'; 
+      littleCursor.style.top = e.clientY + 'px'; });
+      var elements = document.querySelectorAll('.mouse');
+      if (elements) {
+        console.log(elements);
+      }
+      for (var i = 0; i < elements.length; i++) {
+          elements[i].addEventListener('mouseenter', function() {
+              cursor.classList.add('large-cursor');
+              littleCursor.classList.add('littleLarge-cursor')
+          });
+          elements[i].addEventListener('mouseleave', function() {
+              cursor.classList.remove('large-cursor');
+              littleCursor.classList.remove('littleLarge-cursor')
+          });
+      }
+  }, []);
+  // Scrolling to various sections
 
   const aboutScroll = (e) => {
     document.querySelector('#About').scrollIntoView({
@@ -125,10 +150,12 @@ function App() {
 
   return (
     <div className="App" ref={composition}>
+    <div id="cursor" className="cursor"></div>
+    <div id="littleCursor" className="littleCursor"></div>
       <div className="title">
         <div id="navbar" className="navbar">
           <div id="bigButton" className="navComponentBig" >
-            <button style={{fontSize: '25px', width: '25vw'}} className={open ? "btn btnActive" : "btn"} onClick={handleClick} id="aboutBtn" class="btn">
+            <button style={{fontSize: '25px', width: '25vw'}} className={open ? "btn btnActive mouse" : "btn mouse"} onClick={handleClick} id="aboutBtn">
             Menu ≡
             </button>
             <Menu
@@ -147,14 +174,14 @@ function App() {
               <MenuItem className='menuItem' onClick={contactScroll}>Get in Touch</MenuItem>
             </Menu>
           </div>
-          <div id="button-1" className="navComponent" >
-            <button onClick={aboutScroll} id="aboutBtn" class="btn">About</button>
+          <div id="button-1" className="navComponent mouse" >
+            <button onClick={aboutScroll} id="aboutBtn" className="btn mouse">About</button>
           </div>
-          <div id="button-2" className="navComponent">
-            <button  onClick={workScroll} id="workBtn" class="btn">Work</button>
+          <div id="button-2" className="navComponent mouse">
+            <button  onClick={workScroll} id="workBtn" className="btn mouse">Work</button>
           </div>
-          <div id="button-3" className="navComponent">
-            <button  onClick={contactScroll} id="contactBtn" class="btn">Contact</button>
+          <div id="button-3" className="navComponent mouse">
+            <button  onClick={contactScroll} id="contactBtn" className="btn mouse">Contact</button>
           </div>
         </div>
         <div className="backgroundSheet">
@@ -197,7 +224,7 @@ function App() {
                 <div className="titleCard--top">
                   <div className="titleCard--top--text">
                     <div>
-                      <div id="intro-text">
+                      <div id="intro-text" className='mouse'>
                         Hello ! 👋 I'm Santiago.
                       </div>
                       <div id="sub-1" className="titleCard--top--subText">
@@ -211,7 +238,7 @@ function App() {
                       </div>
                     </div>
                   </div>
-                  <div id="image" onClick={handleProfileClick} className="titleCard--top--image"
+                  <div id="image" onClick={handleProfileClick} className="titleCard--top--image mouse"
                   onMouseEnter={handleHover}
                   onMouseLeave={handleLeave}>
                     <Avatar
@@ -275,15 +302,15 @@ function App() {
           <div id="sceneTitle" className="impactCard" style={{filter: 'drop-shadow(2px 2px 0px #000000)', marginTop: '25px', fontSize: '25px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
              I want to make an <span className="highlight Impact">impact </span> on our <span className="highlight World">world </span> with  <span className="highlight Tech">tech.</span>
           </div>
-          <div id="earth" className="ThreeJsScenes">
+          <div id="earth" className="ThreeJsScenes" >
             <SatelliteScene className="satellite"/>
-            <EarthScene id="earth" className="earth"/>
+            <EarthScene id="earth" className="earth mouse"/>
             <UfoScene className="ufo"/>
           </div>
         </div>
         <div id="invite" className="invite" >
           Learn More
-          <img alt='' onClick={aboutScroll} className="invite--scroll" src="/static/images/mouse-cursor.png"
+          <img alt='' onClick={aboutScroll} className="invite--scroll mouse" src="/static/images/mouse-cursor.png"
           ></img>
         </div>
       </div>

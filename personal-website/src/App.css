@@ -28,6 +28,46 @@
 html {
   scroll-behavior: smooth;
   background: var(--rootBackground);
+  cursor: none !important;
+}
+/* Title Page */
+.cursor {
+  position: absolute; 
+  width: 40px;
+  height: 40px; 
+  transition: left 0.1s, top 0.1s, width 0.3s, height 0.3s;
+  transform: translate(-50%, -50%);
+  background-color: var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+}
+.littleCursor {
+  position: absolute; 
+  width: 20px;
+  height: 20px; 
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+  background-color: var(--accentDark);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+}
+/* Cursor Hover Events */
+.large-cursor {
+  width: 60px;
+  height: 60px;
+  opacity: 0.1;
+  transition: opacity 0.3s;
+  transition: width 0.3s, height 0.3s;
+  background-color: #d062ff;
+  z-index: 9999;
+}
+.littleLarge-cursor {
+  width: 10px;
+  height: 10px;
+  transition: width 0.3s, height 0.3s;
+  z-index: 9999;
 }
 .backgroundSheet {
   position: absolute;
@@ -37,7 +77,6 @@ html {
   justify-content: center;
   align-items: end;
 }
-
 .backgroundCircle {
   display: flex;
   justify-content: center;
@@ -50,8 +89,6 @@ html {
   animation: growCircle 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
   border-radius: 50%;
 }
-
-/* Title Page */
 .shapeWrapper {
   width: 100vw; 
   display: flex;
@@ -129,14 +166,14 @@ html {
   font-family: title;
   margin-top: 25px  !important;
   margin-bottom: 15px !important;
-  height: clamp(30px, 4vw, 40px)  !important;
+  height: clamp(40px, 5vw, 60px)  !important;
   font-size: clamp(10px, 2vw, 20px) !important;
   width: 15vw;
   background: var(--rootBackground);
   border: none;
   border-radius: 50px;
   outline: none;
-  cursor: pointer;
+  cursor: none !important;
   transition: all 0.4s;
   box-shadow: 7px 5px 0px 0px var(--accent);
 }
@@ -245,7 +282,7 @@ html {
   align-items: start;
 }
 .titleCard--top--image {
-  cursor: pointer;
+  cursor: none !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -264,7 +301,7 @@ html {
   margin-top: 50px;
 }
 .invite--scroll {
-  cursor: pointer;
+  cursor: none !important;
   margin-top: 10px;
   width: 30px;
   height: 30px;
@@ -455,7 +492,7 @@ html {
   background: var(--background);
   font-size: min(2.5vw, 18px);
   transition: 0.3s;
-  cursor: default;
+  cursor: none !important;
 }
 .aboutToggleUnselected {
   text-align: center;
@@ -465,7 +502,7 @@ html {
   font-size: min(2vw, 16px);
   transition: 0.3s;
   opacity: .5;
-  cursor: pointer;
+  cursor: none !important;
 }
 .aboutSections {
   display: flex;
@@ -488,7 +525,7 @@ html {
   align-items: center;
   margin: 50px 0px;
   text-align: center;
-  cursor: pointer;
+  cursor: none !important;
   width: 50%;
 }
 .programming {

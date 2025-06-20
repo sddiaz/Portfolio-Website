@@ -21,12 +21,12 @@ const EarthScene = () => {
 
   return (
     <div className="scene--earth">
-      <Canvas className="earthCanvas" style={{ zIndex: '3'}} shadows>
+      <Canvas className="earthCanvas" style={{ zIndex: '2'}} shadows>
         <OrbitControls
           autoRotate
           autoRotateSpeed={0.9}
           enableZoom
-          minDistance={80}
+          minDistance={115}
           maxDistance={60}
           enableRotate
           minPolarAngle={Math.PI / 2}

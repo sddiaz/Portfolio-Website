@@ -12,21 +12,14 @@ const EarthScene = () => {
     setEarthSize({ width: window.innerWidth, height: window.innerHeight });
   };
 
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   return (
     <div className="scene--earth">
-      <Canvas className="earthCanvas" style={{ zIndex: '2'}} shadows>
+      <Canvas className="earthCanvas"  shadows>
         <OrbitControls
           autoRotate
           autoRotateSpeed={0.9}
           enableZoom
-          minDistance={115}
+          minDistance={90}
           maxDistance={60}
           enableRotate
           minPolarAngle={Math.PI / 2}

@@ -9,7 +9,7 @@ extend({ OrbitControls });
 const SatelliteScene = () => {
   return (
     <div className="scene--satellite">
-      <Canvas className="earth" shadows>
+      <Canvas className="satellite" shadows>
       <OrbitControls
         autoRotate
         autoRotateSpeed={0.9}

@@ -427,9 +427,9 @@ function App() {
           </div>
 
           <div id="earth" className="ThreeJsScenes">
-            <SatelliteScene className="satellite mouse" />
-            <EarthScene id="earth" className="earth mouse" />
-            <UfoScene className="ufo mouse" />
+            <SatelliteScene className="scene--satellite" />
+            <EarthScene id="earth" className="scene--earth" />
+            <UfoScene className="scene--ufo" />
           </div>
         </div>
 
@@ -456,10 +456,10 @@ function App() {
             <div className="aboutDivider"></div>
             <p className="aboutAbstract">
               I'm Santi, a software engineer at Walmart Global Tech with a
-              degree in computer engineering, pursuing my master's in comp
-              sci at Georgia Tech. I specialize in building
-              clean, user-focused interfaces and bring a strong eye for design
-              through experience in UI/UX and creative technologies.
+              degree in computer engineering, pursuing my master's in comp sci
+              at Georgia Tech. I specialize in building clean, user-focused
+              interfaces and bring a strong eye for design through experience in
+              UI/UX and creative technologies.
             </p>
           </div>
 

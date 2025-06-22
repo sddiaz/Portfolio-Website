@@ -1,0 +1,468 @@
+/* Title Section Styles */
+
+.title {
+  display: flex;
+  justify-content: top;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  position: relative; /* Add this to establish stacking context */
+}
+
+/* Background Elements */
+.backgroundSheet {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  z-index: 1; /* Add explicit z-index */
+}
+
+.backgroundCircle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: center;
+  background: url("../../public/static/images/waves.svg") var(--background);
+  background-size: cover;
+  height: 10px;
+  width: 10px;
+  animation: growCircle 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+  border-radius: 50%;
+}
+
+/* Navigation */
+.navbar {
+  z-index: 1001; /* Increase z-index to be higher than menu */
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  position: relative; /* Add positioning context */
+}
+
+.navComponentBig {
+  display: none;
+  color: var(--mainText);
+  font-family: title;
+  display: flex;
+  justify-content: center;
+  border-radius: 100px;
+  width: 0%;
+  position: relative; /* Add positioning */
+  z-index: 1002; /* Higher than navbar */
+}
+
+.navComponentBig > * {
+  display: none;
+  width: 0%;
+}
+
+.navComponent {
+  color: var(--mainText);
+  font-family: title;
+  display: flex;
+  justify-content: center;
+  border-radius: 100px;
+  width: 25%;
+  position: relative; /* Add positioning */
+  z-index: 1001; /* Same as navbar */
+}
+
+.btn {
+  color: var(--background);
+  font-family: title;
+  margin-top: 10px !important; /* Reduced from 25px */
+  margin-bottom: 15px !important;
+  height: clamp(30px, 4vw, 45px) !important; /* Smaller height range */
+  font-size: clamp(8px, 1.5vw, 16px) !important; /* Smaller font range */
+  width: 12vw; /* Reduced from 15vw */
+  background: var(--rootBackground);
+  border: none;
+  border-radius: 50px;
+  outline: none;
+  transition: all 0.4s;
+  box-shadow: 7px 5px 0px 0px var(--accent);
+  position: relative; /* Add positioning */
+  z-index: 1002; /* Higher z-index */
+}
+
+.btnActive {
+  box-shadow:
+    0px 0px 0px 0px var(--accent),
+    inset 0 0 0 4px #ef476f,
+    inset 0 0 0 8px #d062ff,
+    inset 0 0 0 12px #06d6a0,
+    inset 0 0 0 16px #118ab2 !important;
+  background: #073b4c;
+  color: #fff;
+}
+
+.btn:hover {
+  box-shadow:
+    0px 0px 0px 0px var(--accent),
+    inset 0 0 0 4px #ef476f,
+    inset 0 0 0 8px #d062ff,
+    inset 0 0 0 12px #06d6a0,
+    inset 0 0 0 16px #118ab2 !important;
+  background: #073b4c;
+  color: #fff;
+}
+
+.menuButton {
+  font-size: 12px; /* Smaller font size */
+  height: 30px; /* Smaller height */
+  width: auto; /* Adjust width to fit content */
+  border-radius: 25px; /* Rounded corners */
+  z-index: 1003; /* Highest z-index for menu button */
+}
+
+/* Menu Items - This is the key fix */
+.MuiMenu-paper {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  width: 25%;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+  z-index: 1500 !important; /* Very high z-index for dropdown menu */
+  position: fixed !important; /* Ensure it's positioned correctly */
+}
+
+.menuItem {
+  background: var(--rootBackground) !important;
+  transition: 0.3s !important;
+  margin: 10px 0px !important;
+  box-shadow: 3px 3px 0px 0px var(--wildCard) !important;
+  font-weight: bolder !important;
+  border-radius: 15px !important;
+  font-size: clamp(10px, 3vw, 20px) !important;
+  z-index: 1501 !important; /* Even higher for individual menu items */
+  position: relative !important; /* Ensure positioning context */
+}
+
+.menuItem:hover {
+  background: #073b4c !important;
+  color: #fff !important;
+  box-shadow: 3px 3px 0px 0px var(--accent) !important;
+}
+
+/* Middle Section */
+.middle {
+  height: 77%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative; /* Add positioning */
+  z-index: 10; /* Lower than menu but higher than background */
+}
+
+/* Shapes */
+.shapeWrapper {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  position: relative; /* Add positioning */
+  z-index: 11; /* Slightly higher than middle */
+}
+
+.shapes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25vw;
+  margin-bottom: 25px;
+  gap: 3em;
+}
+
+/* Title Card */
+.titleCard {
+  margin-top: 100px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative; /* Add positioning */
+  z-index: 10; /* Lower than menu */
+}
+
+.titleCard--border {
+  position: relative;
+  padding: 10px;
+  z-index: 10; /* Ensure it's below menu */
+}
+
+.titleCard--border::before,
+.titleCard--border::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border: 1px solid white;
+}
+
+.titleCard--border::before {
+  top: 5px;
+  left: 5px;
+}
+
+.titleCard--border::after {
+  border: 3px solid var(--accent);
+  bottom: 5px;
+  right: 5px;
+}
+
+.titleCard--top {
+  display: flex;
+  justify-content: space-between;
+  font-size: clamp(30px, 5vw, 75px);
+  font-weight: bold;
+  color: var(--mainText);
+  font-family: title;
+}
+
+.titleCard--top--text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#intro-text {
+  max-width: 1000px;
+  width: 44vw;
+}
+
+.titleCard--top--subText {
+  color: var(--accent);
+  font-size: clamp(10px, 2vw, 20px);
+}
+
+.titleCard--top--image {
+  /* cursor: none !important; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Squares */
+.squares {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.square1 {
+  height: 10px;
+  width: 10px;
+  background: var(--wildCard);
+}
+
+.square2 {
+  height: 15px;
+  width: 15px;
+  margin: 0px 10px;
+  background: var(--accentMid);
+}
+
+.square3 {
+  height: 10px;
+  width: 10px;
+  background: var(--accent);
+}
+
+/* Circles */
+.circles {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.circle {
+  /* Base circle styles */
+}
+
+.circle1 {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background: var(--accentDark);
+}
+
+.circle1:hover {
+  transform: scale(1.1);
+}
+
+.circle2 {
+  height: 15px;
+  width: 15px;
+  margin: 0px 10px;
+  border-radius: 50%;
+  background: var(--wildCard);
+}
+
+.circle3 {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* Impact Card */
+.impactCard {
+  display: flex;
+  justify-content: space-between;
+  font-size: 30px;
+  font-weight: bold;
+  color: var(--mainText);
+  font-family: title;
+  position: relative; /* Add positioning */
+  z-index: 10; /* Lower than menu */
+}
+
+/* Highlight Text */
+.highlight {
+  position: relative;
+  margin: 0px 7px;
+}
+
+.highlight:after {
+  content: " ";
+  height: 30%;
+  position: absolute;
+  left: 0;
+  top: 60%;
+  width: calc(100%);
+  z-index: -1;
+}
+
+.Impact:after {
+  background-color: var(--accentDark);
+}
+
+.World:after {
+  background-color: var(--wildCard);
+}
+
+.Tech:after {
+  background-color: lightseagreen;
+}
+
+/* Invite Section */
+.invite {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bolder;
+  color: var(--text);
+  background: var(--background);
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 18px;
+  margin-top: 50px;
+  position: relative; /* Add positioning */
+  z-index: 10; /* Lower than menu */
+}
+
+.invite--scroll {
+  /* cursor: none !important; */
+  margin-top: 10px;
+  width: 30px;
+  height: 30px;
+  filter: invert(100%);
+  animation: mouseMove 2s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes growCircle {
+  0% {
+  }
+  100% {
+    border-radius: 25% 25% 0% 0%;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+  }
+}
+
+@keyframes mouseMove {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* Media Queries */
+@media (max-width: 1080px) or (max-height: 1079px) {
+  .btn {
+    width: 33vw !important;
+    margin: 0px !important;
+    height: clamp(30px, 5vw, 60px) !important;
+    font-size: clamp(15px, 3vw, 25px) !important;
+  }
+
+  .titleCard {
+    margin: 0px !important;
+    width: 30vw;
+  }
+
+  .navComponent {
+    display: none;
+  }
+
+  .navComponentBig {
+    display: flex;
+    width: 33%;
+  }
+
+  .navComponentBig > * {
+    display: inline;
+    width: 33%;
+  }
+
+  .ThreeJsScenes {
+    height: 40vh;
+    width: 50vw;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0px !important;
+  }
+
+  .invite {
+    margin: 0px;
+  }
+
+  .impactCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3vw !important;
+  }
+
+  .backgroundCircle {
+    border-radius: 25%;
+  }
+
+  /* Additional mobile fixes for menu */
+  .MuiMenu-paper {
+    z-index: 2000 !important; /* Even higher z-index on mobile */
+  }
+
+  .menuItem {
+    z-index: 2001 !important; /* Higher on mobile */
+  }
+}

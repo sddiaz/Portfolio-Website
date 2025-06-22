@@ -1,0 +1,544 @@
+/* ========================================
+   ABOUT PAGE STYLES
+   ======================================== */
+
+/* Page Title */
+.Who {
+    font-size: clamp(30px, 5vw, 55px);
+    font-family: title;
+    color: var(--wildCard);
+  }
+  
+  /* Main About Page Container */
+  .aboutPageNew {
+    min-height: 100vh;
+    padding: 80px 40px 40px;
+    background: var(--background);
+    color: var(--text);
+    position: relative;
+    overflow-x: hidden;
+  }
+  
+  /* Animated background elements */
+  .aboutPageNew::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--background);
+    opacity: 0.3;
+    z-index: -1;
+  }
+  
+  /* Main Content Container */
+  .aboutContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Column Layout */
+  .aboutLeftColumn,
+  .aboutRightColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  /* Section Styling */
+  .aboutSection {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 25px;
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+  
+  .aboutSection:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+    border-color: var(--accent);
+  }
+  
+  .aboutSection:hover .aboutSectionTitle {
+    color: var(--accent);
+  }
+  
+  .aboutSection:hover .aboutAbstract,
+  .aboutSection:hover .goalText,
+  .aboutSection:hover .nerdFact {
+    color: var(--subText);
+  }
+  
+  /* Section Titles */
+  .aboutSectionTitle {
+    font-family: title;
+    font-size: clamp(20px, 3vw, 32px);
+    font-weight: bold;
+    margin: 0 0 15px 0;
+    color: var(--mainText);
+    position: relative;
+  }
+  
+  .aboutSectionTitle::after {
+    content: " ";
+    height: 30%;
+    position: absolute;
+    left: 0;
+    top: 60%;
+    width: calc(100%);
+    z-index: -1;
+    transition: all 0.3s ease;
+  }
+  
+  .aboutSectionTitle.impact::after {
+    background-color: var(--accentDark);
+  }
+  
+  .aboutSectionTitle.world::after {
+    background-color: var(--wildCard);
+  }
+  
+  .aboutSectionTitle.tech::after {
+    background-color: var(--accent);
+  }
+  
+  .aboutSectionTitle.goals::after {
+    background-color: var(--accentMid);
+  }
+  
+  /* Section Dividers */
+  .aboutDivider {
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      var(--accent),
+      var(--wildCard),
+      transparent
+    );
+    margin-bottom: 20px;
+    border-radius: 3px;
+  }
+  
+  /* Abstract Section */
+  .aboutAbstract {
+    font-size: clamp(14px, 2vw, 18px);
+    line-height: 1.6;
+    color: var(--mainText);
+    text-align: justify;
+    text-indent: 20px;
+    margin: 0;
+    transition: all 0.3s ease;
+  }
+  
+  /* Decorative shapes for sections */
+  .aboutSection::after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+  
+  .aboutSection:nth-child(1)::after {
+    background: var(--wildCard);
+  }
+  
+  .aboutSection:nth-child(2)::after {
+    background: var(--accent);
+    border-radius: 0;
+  }
+  
+  .aboutSection:nth-child(3)::after {
+    background: var(--accentMid);
+    border-radius: 30%;
+  }
+  
+  .aboutSection:hover::after {
+    transform: scale(1.5) rotate(180deg);
+  }
+  
+  /* ========================================
+     GOALS SECTION
+     ======================================== */
+  
+  .goalsContainer {
+    max-height: 250px;
+    overflow-y: auto;
+    padding-right: 12px;
+  }
+  
+  .goalsContainer::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .goalsContainer::-webkit-scrollbar-track {
+    background: var(--background);
+    border-radius: 10px;
+  }
+  
+  .goalsContainer::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, var(--accent), var(--wildCard));
+    border-radius: 10px;
+    border: 2px solid var(--background);
+  }
+  
+  .goalsContainer::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, var(--wildCard), var(--accent));
+  }
+  
+  .goalsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .goalItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  .goalItem:hover {
+    transform: translateX(5px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--accent);
+  }
+  
+  .goalItem.completed {
+    text-decoration: line-through;
+    opacity: 0.7;
+    background: rgba(7, 59, 76, 0.5);
+  }
+  
+  .goalItem.completed .goalText {
+    color: var(--subText);
+  }
+  
+  .goalText {
+    font-size: clamp(12px, 2vw, 16px);
+    flex: 1;
+    color: var(--mainText);
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  
+  .checkIcon {
+    color: var(--accent);
+    font-size: 20px;
+    margin-left: 12px;
+    transition: all 0.3s ease;
+  }
+  
+  .goalItem:hover .checkIcon {
+    color: var(--wildCard);
+    transform: scale(1.2);
+  }
+  
+  /* ========================================
+     SOCIALS SECTION
+     ======================================== */
+  
+  .socialsContainer {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .socialButton {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    color: var(--mainText);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  .socialButton:hover {
+    transform: translateY(-3px) scale(1.1);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    color: var(--accent);
+  }
+  
+  .socialButton svg {
+    font-size: 24px;
+    transition: all 0.3s ease;
+  }
+  
+  .socialButton:hover svg {
+    transform: rotate(15deg);
+  }
+  
+  /* ========================================
+     SPOTIFY SECTION
+     ======================================== */
+  
+  .spotifyContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .spotifyEmbed {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s ease;
+  }
+  
+  .spotifyEmbed:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    border-color: var(--accent);
+  }
+  
+  /* ========================================
+     NERD FACTS SECTION
+     ======================================== */
+  
+  .nerdFactsSection {
+    margin-top: 0;
+  }
+  
+  .nerdFactsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .nerdFact {
+    font-size: clamp(13px, 2vw, 16px);
+    line-height: 1.6;
+    color: var(--mainText);
+    padding: 20px 25px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    border-left: 3px solid var(--accent);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  .nerdFact::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+  
+  .nerdFact:nth-child(even)::after {
+    background: var(--wildCard);
+    border-radius: 0;
+  }
+  
+  .nerdFact:nth-child(3n)::after {
+    background: var(--accentMid);
+    border-radius: 30%;
+  }
+  
+  .nerdFact:hover {
+    transform: translateX(8px) translateY(-2px);
+    background: rgba(255, 255, 255, 0.08);
+    border-left-color: var(--wildCard);
+    border-color: var(--accent);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  }
+  
+  .nerdFact:hover::after {
+    transform: scale(1.5) rotate(180deg);
+  }
+  
+  .nerdFact::before {
+    content: "▸ ";
+    color: var(--accent);
+    font-weight: bold;
+    font-size: 18px;
+    transition: all 0.3s ease;
+  }
+  
+  .nerdFact:hover::before {
+    color: var(--wildCard);
+    transform: scale(1.2);
+  }
+  
+  /* ========================================
+     FLOATING SHAPES ANIMATION
+     ======================================== */
+  
+  .aboutPageNew .shapes {
+    position: absolute;
+    top: 20%;
+    right: 5%;
+    display: flex;
+    gap: 15px;
+    z-index: 0;
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .aboutPageNew .square1,
+  .aboutPageNew .square2,
+  .aboutPageNew .square3 {
+    animation: float 4s ease-in-out infinite;
+  }
+  
+  .aboutPageNew .square2 {
+    animation-delay: -1s;
+  }
+  
+  .aboutPageNew .square3 {
+    animation-delay: -2s;
+  }
+  
+  /* Float animation */
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-20px) rotate(180deg);
+    }
+  }
+  
+  /* ========================================
+     RESPONSIVE DESIGN
+     ======================================== */
+  
+  /* Tablet and smaller screens */
+  @media (max-width: 1080px) or (max-height: 1079px) {
+    .aboutPageNew {
+      padding: 60px 20px 20px;
+    }
+  
+    .aboutContainer {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+  
+    .aboutLeftColumn,
+    .aboutRightColumn {
+      gap: 25px;
+    }
+  
+    .aboutSection {
+      padding: 25px;
+    }
+  
+    .aboutSectionTitle {
+      font-size: clamp(18px, 4vw, 24px);
+    }
+  
+    .aboutAbstract {
+      font-size: clamp(12px, 3vw, 16px);
+      text-indent: 0;
+    }
+  
+    .goalItem {
+      padding: 12px 15px;
+    }
+  
+    .goalText {
+      font-size: clamp(11px, 3vw, 14px);
+    }
+  
+    .socialButton {
+      width: 45px;
+      height: 45px;
+    }
+  
+    .socialButton svg {
+      font-size: 20px;
+    }
+  
+    .aboutPageNew .shapes {
+      display: none;
+    }
+  
+    .aboutPassion {
+      margin: 25px 0px;
+    }
+  
+    .passionRow {
+      flex-direction: column;
+    }
+  }
+  
+  /* Mobile screens */
+  @media (max-width: 480px) {
+    .aboutPageNew {
+      padding: 40px 16px 16px;
+    }
+  
+    .aboutContainer {
+      gap: 20px;
+    }
+  
+    .aboutLeftColumn,
+    .aboutRightColumn {
+      gap: 20px;
+    }
+  
+    .aboutSection {
+      padding: 20px;
+      border-radius: 20px;
+    }
+  
+    .aboutSectionTitle {
+      font-size: clamp(16px, 5vw, 20px);
+    }
+  
+    .socialsContainer {
+      gap: 15px;
+    }
+  
+    .socialButton {
+      width: 40px;
+      height: 40px;
+    }
+  
+    .nerdFact {
+      padding: 15px 20px;
+    }
+  }

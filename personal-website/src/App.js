@@ -7,11 +7,11 @@ import React, { useLayoutEffect, useRef, useState } from "react";
 import { Circle } from "react-awesome-shapes/dist/shapes/circle";
 import { Diamond } from "react-awesome-shapes/dist/shapes/diamond";
 import "./App.css";
+import YoutubeEmbed from "./Components/YoutubeEmbed.tsx";
 import EarthScene from "./Scenes/EarthScene";
 import SatelliteScene from "./Scenes/SatelliteScene";
 import UfoScene from "./Scenes/UfoScene";
 import "./styles/ParallaxEffect.scss";
-import YoutubeEmbed from "./Components/YoutubeEmbed.tsx";
 
 function App() {
   // Variables
@@ -56,66 +56,66 @@ function App() {
   ];
 
   // Animations
-  useLayoutEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "instant",
-    });
+  // useLayoutEffect(() => {
+  //   window.scrollTo({
+  //     top: 0,
+  //     left: 0,
+  //     behavior: "instant",
+  //   });
 
-    let ctx = gsap.context(() => {
-      const timeline = gsap.timeline();
-      timeline
-        .from(["#card", "#navbar"], {
-          delay: 0.8,
-          duration: 1,
-          opacity: 0,
-          y: "+=30",
-        })
-        .from("#intro-text", {
-          opacity: 0,
-          y: "+=30",
-          duration: 1,
-        })
-        .from(["#sub-1", "#sub-2", "#sub-3"], {
-          opacity: 0,
-          y: "+=30",
-          stagger: 0.2,
-        })
-        .from(
-          [
-            "#button-1",
-            "#button-2",
-            "#button-3",
-            "#shape-1",
-            "#shape-2",
-            "#shape-3",
-          ],
-          {
-            opacity: 0,
-            x: "-=30",
-            stagger: 0.2,
-          }
-        )
-        .from("#sceneTitle", {
-          opacity: 0,
-          y: "+=30",
-          stagger: 0.2,
-        })
-        .from("#scene", {
-          opacity: 0,
-          y: "+=30",
-          stagger: 0.2,
-        })
-        .from(["#earth", "#invite"], {
-          opacity: 0,
-          y: "+=30",
-          stagger: 0.2,
-        });
-    }, composition);
+  //   let ctx = gsap.context(() => {
+  //     const timeline = gsap.timeline();
+  //     timeline
+  //       .from(["#card", "#navbar"], {
+  //         delay: 0.8,
+  //         duration: 1,
+  //         opacity: 0,
+  //         y: "+=30",
+  //       })
+  //       .from("#intro-text", {
+  //         opacity: 0,
+  //         y: "+=30",
+  //         duration: 1,
+  //       })
+  //       .from(["#sub-1", "#sub-2", "#sub-3"], {
+  //         opacity: 0,
+  //         y: "+=30",
+  //         stagger: 0.2,
+  //       })
+  //       .from(
+  //         [
+  //           "#button-1",
+  //           "#button-2",
+  //           "#button-3",
+  //           "#shape-1",
+  //           "#shape-2",
+  //           "#shape-3",
+  //         ],
+  //         {
+  //           opacity: 0,
+  //           x: "-=30",
+  //           stagger: 0.2,
+  //         }
+  //       )
+  //       .from("#sceneTitle", {
+  //         opacity: 0,
+  //         y: "+=30",
+  //         stagger: 0.2,
+  //       })
+  //       .from("#scene", {
+  //         opacity: 0,
+  //         y: "+=30",
+  //         stagger: 0.2,
+  //       })
+  //       .from(["#earth", "#invite"], {
+  //         opacity: 0,
+  //         y: "+=30",
+  //         stagger: 0.2,
+  //       });
+  //   }, composition);
 
-    return () => ctx.revert();
-  }, []);
+  //   return () => ctx.revert();
+  // }, []);
 
   const handleProfileClick = () => {
     window.open("https://www.linkedin.com/in/santiagoddiaz", "_blank");
@@ -445,150 +445,154 @@ function App() {
       </div>
 
       {/* ABOUT SECTION */}
-      <div id="About" className="Page aboutPageNew">
-        <div className="Who pageTitle">
-          Who am <div className="regular"> I? </div>
-        </div>
+      <div id="About" className="Page">
         <div className="aboutContainer">
-          {/* Abstract Section */}
-          <div className="aboutSection">
-            <h2 className="aboutSectionTitle">Abstract</h2>
-            <div className="aboutDivider"></div>
-            <p className="aboutAbstract">
-              I'm Santi, a software engineer at Walmart Global Tech with a
-              degree in computer engineering, pursuing my master's in comp sci
-              at Georgia Tech. I specialize in building clean, user-focused
-              interfaces and bring a strong eye for design through experience in
-              UI/UX and creative technologies.
-            </p>
+          <div className="Who pageTitle">
+            Who am <div className="regular"> I? </div>
           </div>
+          <div>
+            {/* Abstract Section */}
+            <div className="aboutSection">
+              <h2 className="aboutSectionTitle">Abstract</h2>
+              <div className="aboutDivider"></div>
+              <p className="aboutAbstract">
+                I'm Santi, a software engineer at Walmart Global Tech with a
+                degree in computer engineering, pursuing my master's in comp sci
+                at Georgia Tech. I specialize in building clean, user-focused
+                interfaces and bring a strong eye for design through experience
+                in UI/UX and creative technologies.
+              </p>
+            </div>
 
-          <div className="flexRow">
-            <div className="flexCol">
-              {/* Life Goals Section */}
-              <div className="aboutSection">
-                <h2 className="aboutSectionTitle">Bucket List</h2>
-                <div className="aboutDivider"></div>
-                <div className="goalsContainer">
-                  <ul className="goalsList">
-                    {lifeGoals.map((goal, index) => (
-                      <li
-                        key={index}
-                        className={`goalItem ${
-                          goal.completed ? "completed" : ""
-                        }`}
-                      >
-                        <span className="goalText">{goal.text}</span>
-                        {goal.completed && (
-                          <CheckCircle className="checkIcon" />
-                        )}
+            <div className="flexRow">
+              <div className="flexCol">
+                {/* Life Goals Section */}
+                <div className="aboutSection">
+                  <h2 className="aboutSectionTitle">Bucket List</h2>
+                  <div className="aboutDivider"></div>
+                  <div className="goalsContainer">
+                    <ul className="goalsList">
+                      {lifeGoals.map((goal, index) => (
+                        <li
+                          key={index}
+                          className={`goalItem ${
+                            goal.completed ? "completed" : ""
+                          }`}
+                        >
+                          <span className="goalText">{goal.text}</span>
+                          {goal.completed && (
+                            <CheckCircle className="checkIcon" />
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                {/* Nerd Facts Section - Full Width */}
+                <div className="aboutSection">
+                  <h2 className="aboutSectionTitle">
+                    Nerd facts & random stuff
+                  </h2>
+                  <div className="aboutDivider"></div>
+                  <ul className="nerdFactsList">
+                    {nerdFacts.map((fact, index) => (
+                      <li key={index} className="nerdFact">
+                        {fact}
                       </li>
                     ))}
                   </ul>
                 </div>
               </div>
-              {/* Nerd Facts Section - Full Width */}
-              <div className="aboutSection">
-                <h2 className="aboutSectionTitle">Nerd facts & random stuff</h2>
-                <div className="aboutDivider"></div>
-                <ul className="nerdFactsList">
-                  {nerdFacts.map((fact, index) => (
-                    <li key={index} className="nerdFact">
-                      {fact}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
 
-            <div className="flexCol">
-              {/* Socials Section */}
-              <div className="aboutSection">
-                <h2 className="aboutSectionTitle">Socials</h2>
-                <div className="aboutDivider"></div>
-                <div className="socialsContainer">
-                  <button
-                    className="socialButton mouse"
-                    onClick={() =>
-                      window.open(
-                        "https://www.linkedin.com/in/santiagoddiaz",
-                        "_blank"
-                      )
-                    }
-                  >
-                    <LinkedIn />
-                  </button>
-                  <button
-                    className="socialButton mouse"
-                    onClick={() =>
-                      window.open("https://github.com/sddiaz", "_blank")
-                    }
-                  >
-                    <GitHub />
-                  </button>
-                  <button
-                    className="socialButton mouse"
-                    onClick={() =>
-                      window.open(
-                        "https://www.instagram.com/cautified",
-                        "_blank"
-                      )
-                    }
-                  >
-                    <Instagram />
-                  </button>
+              <div className="flexCol">
+                {/* Socials Section */}
+                <div className="aboutSection">
+                  <h2 className="aboutSectionTitle">Socials</h2>
+                  <div className="aboutDivider"></div>
+                  <div className="socialsContainer">
+                    <button
+                      className="socialButton mouse"
+                      onClick={() =>
+                        window.open(
+                          "https://www.linkedin.com/in/santiagoddiaz",
+                          "_blank"
+                        )
+                      }
+                    >
+                      <LinkedIn />
+                    </button>
+                    <button
+                      className="socialButton mouse"
+                      onClick={() =>
+                        window.open("https://github.com/sddiaz", "_blank")
+                      }
+                    >
+                      <GitHub />
+                    </button>
+                    <button
+                      className="socialButton mouse"
+                      onClick={() =>
+                        window.open(
+                          "https://www.instagram.com/cautified",
+                          "_blank"
+                        )
+                      }
+                    >
+                      <Instagram />
+                    </button>
+                  </div>
                 </div>
-              </div>
 
-              {/* Spotify Section */}
-              <div className="aboutSection">
-                <h2 className="aboutSectionTitle">Favorite Songs</h2>
-                <div className="aboutDivider"></div>
-                <div className="spotifyContainer">
-                  <iframe
-                    title="marias"
-                    style={{ borderRadius: "12px" }}
-                    src="https://open.spotify.com/embed/track/1ShRHPAiiIrh0arZbSFmx1?utm_source=generator&theme=0"
-                    width="100%"
-                    height="152"
-                    frameBorder="0"
-                    allowfullscreen=""
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    loading="lazy"
-                  ></iframe>
+                {/* Spotify Section */}
+                <div className="aboutSection">
+                  <h2 className="aboutSectionTitle">Favorite Songs</h2>
+                  <div className="aboutDivider"></div>
+                  <div className="spotifyContainer">
+                    <iframe
+                      title="marias"
+                      style={{ borderRadius: "12px" }}
+                      src="https://open.spotify.com/embed/track/1ShRHPAiiIrh0arZbSFmx1?utm_source=generator&theme=0"
+                      width="100%"
+                      height="152"
+                      frameBorder="0"
+                      allowfullscreen=""
+                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                      loading="lazy"
+                    ></iframe>
 
-                  <iframe
-                    title="laroi"
-                    style={{ borderRadius: "12px" }}
-                    src="https://open.spotify.com/embed/track/3CJrKExvAP6RCtUR8Cf99P?utm_source=generator&theme=0"
-                    width="100%"
-                    height="152"
-                    frameBorder="0"
-                    allowfullscreen=""
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    loading="lazy"
-                  ></iframe>
+                    <iframe
+                      title="laroi"
+                      style={{ borderRadius: "12px" }}
+                      src="https://open.spotify.com/embed/track/3CJrKExvAP6RCtUR8Cf99P?utm_source=generator&theme=0"
+                      width="100%"
+                      height="152"
+                      frameBorder="0"
+                      allowfullscreen=""
+                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                      loading="lazy"
+                    ></iframe>
 
-                  <iframe
-                    title="switchfoot"
-                    style={{ borderRadius: "12px" }}
-                    src="https://open.spotify.com/embed/track/0suxuyHvv1GoUdluByrmC0?utm_source=generator&theme=0"
-                    width="100%"
-                    height="152"
-                    frameBorder="0"
-                    allowfullscreen=""
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    loading="lazy"
-                  ></iframe>
+                    <iframe
+                      title="switchfoot"
+                      style={{ borderRadius: "12px" }}
+                      src="https://open.spotify.com/embed/track/0suxuyHvv1GoUdluByrmC0?utm_source=generator&theme=0"
+                      width="100%"
+                      height="152"
+                      frameBorder="0"
+                      allowfullscreen=""
+                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                      loading="lazy"
+                    ></iframe>
+                  </div>
                 </div>
-              </div>
 
-              {/* Spotify Section */}
-              <div className="aboutSection">
-                <h2 className="aboutSectionTitle">Coding Fuel</h2>
-                <div className="aboutDivider"></div>
-                <div className="spotifyContainer">
-                  <YoutubeEmbed />
+                {/* Spotify Section */}
+                <div className="aboutSection">
+                  <h2 className="aboutSectionTitle">Coding Fuel</h2>
+                  <div className="aboutDivider"></div>
+                  <div className="spotifyContainer">
+                    <YoutubeEmbed />
+                  </div>
                 </div>
               </div>
             </div>

@@ -94,25 +94,10 @@ type GLTFResult = GLTF & {
 type ContextType = Record<string, React.ForwardRefExoticComponent<JSX.IntrinsicElements['mesh']>>
 
 export function Earth(props: JSX.IntrinsicElements['group']) {
-  const [scale, setScale] = useState(window.innerWidth < 1080 ? 3.5 : 4.5);
-  const [earthPosition, setPosition] = useState(window.innerWidth < 1080 ? [0,-25,0] : [0,-35,0]);
-  useEffect(() => {
-    const handleResize = () => {
-      setScale(window.innerWidth < 1080 ? 3.5 : 5);
-      setPosition(window.innerWidth < 1080 ? [0,-25,0] : [0,-35,0]);
-    };
-
-    // Add event listener on mount
-    window.addEventListener('resize', handleResize);
-    // Remove event listener on unmount
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   const { nodes, materials } = useGLTF('/earth/earth.glb') as GLTFResult
   return (
-    <group {...props} dispose={null} scale={scale} position={earthPosition} receiveShadow> 
+    <group {...props} dispose={null} scale={5} position={[0,-35,0]} receiveShadow> 
       <mesh receiveShadow geometry={nodes.Plane001.geometry} material={materials['Material.001']} position={[6.647, 6.616, 1.948]} rotation={[0.158, -0.143, -1.469]} scale={0.184} />
       <mesh receiveShadow geometry={nodes.Plane002.geometry} material={materials['Material.001']} position={[6.62, 7.704, 1.502]} rotation={[0.178, -0.205, -1.356]} scale={0.184} />
       <mesh receiveShadow geometry={nodes.Plane003.geometry} material={materials['Material.001']} position={[6.763, 7.715, -0.562]} rotation={[0.133, 0.023, -1.401]} scale={0.184} />

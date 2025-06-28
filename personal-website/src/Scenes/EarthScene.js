@@ -19,7 +19,7 @@ const EarthScene = () => {
           autoRotate
           autoRotateSpeed={0.9}
           enableZoom
-          minDistance={90}
+          minDistance={80}
           maxDistance={60}
           enableRotate
           minPolarAngle={Math.PI / 2}

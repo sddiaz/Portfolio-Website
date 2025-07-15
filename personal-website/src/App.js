@@ -2,19 +2,149 @@ import { CheckCircle, GitHub, Instagram, LinkedIn } from "@mui/icons-material";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import gsap from "gsap";
-import React, { useLayoutEffect, useRef, useState } from "react";
+import Particles, { initParticlesEngine } from "@tsparticles/react";
+import { loadBasic } from "@tsparticles/basic";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Circle } from "react-awesome-shapes/dist/shapes/circle";
 import { Diamond } from "react-awesome-shapes/dist/shapes/diamond";
 import "./App.css";
 import YoutubeEmbed from "./Components/YoutubeEmbed.tsx";
+import Experience from "./Pages/Experience.tsx";
 import EarthScene from "./Scenes/EarthScene";
 import SatelliteScene from "./Scenes/SatelliteScene";
 import UfoScene from "./Scenes/UfoScene";
 import "./styles/ParallaxEffect.scss";
 
+const particlesConfig = {
+      background: {
+        color: {
+          value: "transparent",
+        },
+      },
+      fpsLimit: 120,
+      interactivity: {
+        events: {
+          onClick: {
+            enable: true,
+            mode: "push",
+          },
+          onHover: {
+            enable: true,
+            mode: "bubble",
+          },
+          resize: {
+            enable: true,
+          },
+        },
+        modes: {
+          push: {
+            quantity: 6,
+          },
+          bubble: {
+            distance: 250,
+            duration: 2,
+            size: 8,
+            opacity: 0.8,
+          },
+          repulse: {
+            distance: 200,
+            duration: 0.4,
+          },
+        },
+      },
+      particles: {
+        color: {
+          value: [
+            "#62ffdc",
+            "#d062ff",
+            "#1cc99e",
+            "#338573",
+            "#f3f3f3",
+            "#c9d2f5",
+          ], // Your CSS color variables
+        },
+        links: {
+          color: "#62ffdc", // Your accent color
+          distance: 120,
+          enable: true,
+          opacity: 0.15,
+          width: 0.5,
+        },
+        move: {
+          direction: "none",
+          enable: true,
+          outModes: {
+            default: "out",
+          },
+          random: true,
+          speed: {
+            min: 0.1,
+            max: 0.6, // Slightly slower for elegant movement
+          },
+          straight: false,
+        },
+        number: {
+          density: {
+            enable: true,
+            area: 800,
+          },
+          value: 150, // Adjusted for title page size
+        },
+        opacity: {
+          value: {
+            min: 0.1,
+            max: 1,
+          },
+          animation: {
+            enable: true,
+            speed: 1,
+            sync: false,
+            startValue: "random",
+            mode: "auto",
+          },
+        },
+        shape: {
+          type: "circle",
+        },
+        size: {
+          value: {
+            min: 0.5,
+            max: 3.5,
+          },
+          animation: {
+            enable: true,
+            speed: 2,
+            sync: false,
+            startValue: "random",
+            mode: "auto",
+          },
+        },
+        // Remove potentially unsupported properties
+        // twinkle, rotate, shadow, motion may not be supported in your version
+      },
+      detectRetina: true,
+};
+
+const ParticlesBackground = React.memo(() => {
+  const [initializeParticles, setInitializeParticles] = useState(false);
+
+  useEffect(() => {
+    initParticlesEngine(async (engine) => {
+      await loadBasic(engine);
+    }).then(() => {
+      setInitializeParticles(true);
+    });
+  }, []);
+
+  if (!initializeParticles) return null;
+
+  return <Particles id="tsparticles" options={particlesConfig} />;
+});
+
+
 function App() {
   // Variables
+  const [initializeParticles, setInitializeParticles] = useState(false);
   const [programFlip, setProgramFlip] = useState(false);
   const [isHovered, setIsHovering] = useState(false);
   const composition = useRef(null);
@@ -29,7 +159,6 @@ function App() {
     setAnchorEl(null);
   };
 
-  // Life goals checklist data
   const lifeGoals = [
     { text: "Earn a B.S. in Computer Engineering", completed: true },
     { text: "Land first Software Engineering role", completed: true },
@@ -46,7 +175,6 @@ function App() {
     { text: "Marry my girlfriend :D", completed: false },
   ];
 
-  // Nerd facts data
   const nerdFacts = [
     "I've been doing video editing since I was 14",
     "My daily ride is a CBR500R motorcycle",
@@ -55,67 +183,17 @@ function App() {
     "I'm happy you read this far",
   ];
 
-  // Animations
-  // useLayoutEffect(() => {
-  //   window.scrollTo({
-  //     top: 0,
-  //     left: 0,
-  //     behavior: "instant",
-  //   });
+  const particlesConfigRef = useRef(particlesConfig);
 
-  //   let ctx = gsap.context(() => {
-  //     const timeline = gsap.timeline();
-  //     timeline
-  //       .from(["#card", "#navbar"], {
-  //         delay: 0.8,
-  //         duration: 1,
-  //         opacity: 0,
-  //         y: "+=30",
-  //       })
-  //       .from("#intro-text", {
-  //         opacity: 0,
-  //         y: "+=30",
-  //         duration: 1,
-  //       })
-  //       .from(["#sub-1", "#sub-2", "#sub-3"], {
-  //         opacity: 0,
-  //         y: "+=30",
-  //         stagger: 0.2,
-  //       })
-  //       .from(
-  //         [
-  //           "#button-1",
-  //           "#button-2",
-  //           "#button-3",
-  //           "#shape-1",
-  //           "#shape-2",
-  //           "#shape-3",
-  //         ],
-  //         {
-  //           opacity: 0,
-  //           x: "-=30",
-  //           stagger: 0.2,
-  //         }
-  //       )
-  //       .from("#sceneTitle", {
-  //         opacity: 0,
-  //         y: "+=30",
-  //         stagger: 0.2,
-  //       })
-  //       .from("#scene", {
-  //         opacity: 0,
-  //         y: "+=30",
-  //         stagger: 0.2,
-  //       })
-  //       .from(["#earth", "#invite"], {
-  //         opacity: 0,
-  //         y: "+=30",
-  //         stagger: 0.2,
-  //       });
-  //   }, composition);
-
-  //   return () => ctx.revert();
-  // }, []);
+  // Initialize particles engine
+  useEffect(() => {
+    initParticlesEngine(async (engine) => {
+      // Load the slim version
+      await loadBasic(engine);
+    }).then(() => {
+      setInitializeParticles(true);
+    });
+  }, []);
 
   const handleProfileClick = () => {
     window.open("https://www.linkedin.com/in/santiagoddiaz", "_blank");
@@ -128,76 +206,6 @@ function App() {
   const handleLeave = () => {
     setIsHovering(false);
   };
-
-  // Custom Cursor
-  // useEffect(() => {
-  //   const cursor = document.getElementById("cursor");
-  //   const littleCursor = document.getElementById("littleCursor");
-
-  //   if (!cursor || !littleCursor) return;
-
-  //   let mouseX = 0;
-  //   let mouseY = 0;
-  //   let cursorX = 0;
-  //   let cursorY = 0;
-  //   let littleCursorX = 0;
-  //   let littleCursorY = 0;
-
-  //   // Smooth cursor movement with requestAnimationFrame
-  //   const updateCursor = () => {
-  //     // Smooth interpolation for main cursor
-  //     cursorX += (mouseX - cursorX) * 0.1;
-  //     cursorY += (mouseY - cursorY) * 0.1;
-
-  //     // Faster interpolation for little cursor
-  //     littleCursorX += (mouseX - littleCursorX) * 0.3;
-  //     littleCursorY += (mouseY - littleCursorY) * 0.3;
-
-  //     cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
-  //     littleCursor.style.transform = `translate(${littleCursorX}px, ${littleCursorY}px)`;
-
-  //     requestAnimationFrame(updateCursor);
-  //   };
-
-  //   // Mouse move handler - just update mouse position
-  //   const handleMouseMove = (e) => {
-  //     mouseX = e.clientX;
-  //     mouseY = e.clientY;
-  //   };
-
-  //   // Start the animation loop
-  //   updateCursor();
-
-  //   // Add event listener
-  //   document.addEventListener("mousemove", handleMouseMove);
-
-  //   // Handle hover effects
-  //   const elements = document.querySelectorAll(".mouse");
-
-  //   const handleMouseEnter = () => {
-  //     cursor.classList.add("large-cursor");
-  //     littleCursor.classList.add("littleLarge-cursor");
-  //   };
-
-  //   const handleMouseLeave = () => {
-  //     cursor.classList.remove("large-cursor");
-  //     littleCursor.classList.remove("littleLarge-cursor");
-  //   };
-
-  //   elements.forEach(element => {
-  //     element.addEventListener("mouseenter", handleMouseEnter);
-  //     element.addEventListener("mouseleave", handleMouseLeave);
-  //   });
-
-  //   // Cleanup
-  //   return () => {
-  //     document.removeEventListener("mousemove", handleMouseMove);
-  //     elements.forEach(element => {
-  //       element.removeEventListener("mouseenter", handleMouseEnter);
-  //       element.removeEventListener("mouseleave", handleMouseLeave);
-  //     });
-  //   };
-  // }, []);
 
   // Scrolling to various sections
   const aboutScroll = (e) => {
@@ -227,10 +235,6 @@ function App() {
 
   return (
     <div className="App" ref={composition}>
-      {/* Custom Cursor */}
-      {/* <div id="cursor" className="cursor"></div>
-      <div id="littleCursor" className="littleCursor"></div> */}
-
       <div className="title">
         <div id="navbar" className="navbar">
           <div id="bigButton" className="navComponentBig">
@@ -288,6 +292,7 @@ function App() {
         </div>
 
         <div className="backgroundSheet">
+          {<ParticlesBackground />}
           <div className="backgroundCircle" />
         </div>
 
@@ -446,153 +451,149 @@ function App() {
 
       {/* ABOUT SECTION */}
       <div id="About" className="Page">
-        <div className="aboutContainer">
-          <div className="Who pageTitle">
-            Who am <div className="regular"> I? </div>
+        <div className="Who pageTitle">
+          About <div className="regular"> me </div>
+        </div>
+        <div>
+          {/* Abstract Section */}
+          <div className="card">
+            <h2 className="cardTitle">Abstract</h2>
+            <div className="aboutDivider"></div>
+            <p className="aboutAbstract">
+              I'm Santi, a software engineer at Walmart Global Tech with a
+              degree in computer engineering, pursuing my master's in comp sci
+              at Georgia Tech. I specialize in building clean, user-focused
+              interfaces and bring a strong eye for design through experience in
+              UI/UX and creative technologies.
+            </p>
           </div>
-          <div>
-            {/* Abstract Section */}
-            <div className="aboutSection">
-              <h2 className="aboutSectionTitle">Abstract</h2>
-              <div className="aboutDivider"></div>
-              <p className="aboutAbstract">
-                I'm Santi, a software engineer at Walmart Global Tech with a
-                degree in computer engineering, pursuing my master's in comp sci
-                at Georgia Tech. I specialize in building clean, user-focused
-                interfaces and bring a strong eye for design through experience
-                in UI/UX and creative technologies.
-              </p>
-            </div>
 
-            <div className="flexRow">
-              <div className="flexCol">
-                {/* Life Goals Section */}
-                <div className="aboutSection">
-                  <h2 className="aboutSectionTitle">Bucket List</h2>
-                  <div className="aboutDivider"></div>
-                  <div className="goalsContainer">
-                    <ul className="goalsList">
-                      {lifeGoals.map((goal, index) => (
-                        <li
-                          key={index}
-                          className={`goalItem ${
-                            goal.completed ? "completed" : ""
-                          }`}
-                        >
-                          <span className="goalText">{goal.text}</span>
-                          {goal.completed && (
-                            <CheckCircle className="checkIcon" />
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-                {/* Nerd Facts Section - Full Width */}
-                <div className="aboutSection">
-                  <h2 className="aboutSectionTitle">
-                    Nerd facts & random stuff
-                  </h2>
-                  <div className="aboutDivider"></div>
-                  <ul className="nerdFactsList">
-                    {nerdFacts.map((fact, index) => (
-                      <li key={index} className="nerdFact">
-                        {fact}
+          <div className="flexRow">
+            <div className="flexCol">
+              {/* Life Goals Section */}
+              <div className="card">
+                <h2 className="cardTitle">Bucket List</h2>
+                <div className="aboutDivider"></div>
+                <div className="goalsContainer">
+                  <ul className="goalsList">
+                    {lifeGoals.map((goal, index) => (
+                      <li
+                        key={index}
+                        className={`goalItem ${
+                          goal.completed ? "completed" : ""
+                        }`}
+                      >
+                        <span className="goalText">{goal.text}</span>
+                        {goal.completed && (
+                          <CheckCircle className="checkIcon" />
+                        )}
                       </li>
                     ))}
                   </ul>
                 </div>
               </div>
+              {/* Nerd Facts Section - Full Width */}
+              <div className="card">
+                <h2 className="cardTitle">Nerd facts & random stuff</h2>
+                <div className="aboutDivider"></div>
+                <ul className="nerdFactsList">
+                  {nerdFacts.map((fact, index) => (
+                    <li key={index} className="nerdFact">
+                      {fact}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
 
-              <div className="flexCol">
-                {/* Socials Section */}
-                <div className="aboutSection">
-                  <h2 className="aboutSectionTitle">Socials</h2>
-                  <div className="aboutDivider"></div>
-                  <div className="socialsContainer">
-                    <button
-                      className="socialButton mouse"
-                      onClick={() =>
-                        window.open(
-                          "https://www.linkedin.com/in/santiagoddiaz",
-                          "_blank"
-                        )
-                      }
-                    >
-                      <LinkedIn />
-                    </button>
-                    <button
-                      className="socialButton mouse"
-                      onClick={() =>
-                        window.open("https://github.com/sddiaz", "_blank")
-                      }
-                    >
-                      <GitHub />
-                    </button>
-                    <button
-                      className="socialButton mouse"
-                      onClick={() =>
-                        window.open(
-                          "https://www.instagram.com/cautified",
-                          "_blank"
-                        )
-                      }
-                    >
-                      <Instagram />
-                    </button>
-                  </div>
+            <div className="flexCol">
+              {/* Socials Section */}
+              <div className="card">
+                <h2 className="cardTitle">Socials</h2>
+                <div className="aboutDivider"></div>
+                <div className="socialsContainer">
+                  <button
+                    className="socialButton mouse"
+                    onClick={() =>
+                      window.open(
+                        "https://www.linkedin.com/in/santiagoddiaz",
+                        "_blank"
+                      )
+                    }
+                  >
+                    <LinkedIn />
+                  </button>
+                  <button
+                    className="socialButton mouse"
+                    onClick={() =>
+                      window.open("https://github.com/sddiaz", "_blank")
+                    }
+                  >
+                    <GitHub />
+                  </button>
+                  <button
+                    className="socialButton mouse"
+                    onClick={() =>
+                      window.open(
+                        "https://www.instagram.com/cautified",
+                        "_blank"
+                      )
+                    }
+                  >
+                    <Instagram />
+                  </button>
                 </div>
+              </div>
 
-                {/* Spotify Section */}
-                <div className="aboutSection">
-                  <h2 className="aboutSectionTitle">Favorite Songs</h2>
-                  <div className="aboutDivider"></div>
-                  <div className="spotifyContainer">
-                    <iframe
-                      title="marias"
-                      style={{ borderRadius: "12px" }}
-                      src="https://open.spotify.com/embed/track/1ShRHPAiiIrh0arZbSFmx1?utm_source=generator&theme=0"
-                      width="100%"
-                      height="152"
-                      frameBorder="0"
-                      allowfullscreen=""
-                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                      loading="lazy"
-                    ></iframe>
+              {/* Spotify Section */}
+              <div className="card">
+                <h2 className="cardTitle">Favorite Songs</h2>
+                <div className="aboutDivider"></div>
+                <div className="spotifyContainer">
+                  <iframe
+                    title="marias"
+                    style={{ borderRadius: "12px" }}
+                    src="https://open.spotify.com/embed/track/1ShRHPAiiIrh0arZbSFmx1?utm_source=generator&theme=0"
+                    width="100%"
+                    height="152"
+                    frameBorder="0"
+                    allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"
+                  ></iframe>
 
-                    <iframe
-                      title="laroi"
-                      style={{ borderRadius: "12px" }}
-                      src="https://open.spotify.com/embed/track/3CJrKExvAP6RCtUR8Cf99P?utm_source=generator&theme=0"
-                      width="100%"
-                      height="152"
-                      frameBorder="0"
-                      allowfullscreen=""
-                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                      loading="lazy"
-                    ></iframe>
+                  <iframe
+                    title="laroi"
+                    style={{ borderRadius: "12px" }}
+                    src="https://open.spotify.com/embed/track/3CJrKExvAP6RCtUR8Cf99P?utm_source=generator&theme=0"
+                    width="100%"
+                    height="152"
+                    frameBorder="0"
+                    allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"
+                  ></iframe>
 
-                    <iframe
-                      title="switchfoot"
-                      style={{ borderRadius: "12px" }}
-                      src="https://open.spotify.com/embed/track/0suxuyHvv1GoUdluByrmC0?utm_source=generator&theme=0"
-                      width="100%"
-                      height="152"
-                      frameBorder="0"
-                      allowfullscreen=""
-                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                      loading="lazy"
-                    ></iframe>
-                  </div>
+                  <iframe
+                    title="switchfoot"
+                    style={{ borderRadius: "12px" }}
+                    src="https://open.spotify.com/embed/track/0suxuyHvv1GoUdluByrmC0?utm_source=generator&theme=0"
+                    width="100%"
+                    height="152"
+                    frameBorder="0"
+                    allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"
+                  ></iframe>
                 </div>
+              </div>
 
-                {/* Spotify Section */}
-                <div className="aboutSection">
-                  <h2 className="aboutSectionTitle">Coding Fuel</h2>
-                  <div className="aboutDivider"></div>
-                  <div className="spotifyContainer">
-                    <YoutubeEmbed />
-                  </div>
+              {/* Spotify Section */}
+              <div className="card">
+                <h2 className="cardTitle">Coding Fuel</h2>
+                <div className="aboutDivider"></div>
+                <div className="spotifyContainer">
+                  <YoutubeEmbed />
                 </div>
               </div>
             </div>
@@ -605,6 +606,7 @@ function App() {
         <div className="What pageTitle">
           Experience <div className="regular"> and </div> Skills
         </div>
+        <Experience />
       </div>
 
       {/* PROJECTS SECTION */}

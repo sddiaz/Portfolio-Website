@@ -34,7 +34,7 @@
 
 html {
   scroll-behavior: smooth;
-  background: var(--rootBackground);
+  background: var(--background);
 }
 
 /* ==========================================================================
@@ -44,10 +44,9 @@ html {
 .flexRow {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
   width: 100%;
-  gap: 3rem;
 }
 
 .flexRow .flexCol {
@@ -121,13 +120,14 @@ html {
      ========================================================================== */
 
 .backgroundSheet {
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: end;
   overflow: hidden; /* Prevent any overflow issues */
+  z-index: -999;
 }
 
 .backgroundCircle {
@@ -354,7 +354,7 @@ html {
   align-items: center;
   font-weight: bolder;
   color: var(--text);
-  background: var(--background);
+  background: var(--accentMid);
   padding: 10px 20px;
   border-radius: 5px;
   font-size: 12px;
@@ -540,7 +540,7 @@ html {
 /* ==========================================================================
      PAGE LAYOUT
      ========================================================================== */
-
+.App
 .Page {
   background: var(--background);
 }
@@ -581,7 +581,7 @@ html {
   gap: 40px;
 }
 
-.aboutSection {
+.card {
   margin: 10px 20px;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
@@ -593,24 +593,24 @@ html {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
-.aboutSection:hover {
+.card:hover {
   transform: translateY(-5px);
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
   border-color: var(--accent);
 }
 
-.aboutSection:hover .aboutSectionTitle {
+.card:hover .aboutSectionTitle {
   color: var(--accent);
 }
 
-.aboutSection:hover .aboutAbstract,
-.aboutSection:hover .goalText,
-.aboutSection:hover .nerdFact {
+.card:hover .aboutAbstract,
+.card:hover .goalText,
+.card:hover .nerdFact {
   color: var(--subText);
 }
 
-.aboutSectionTitle {
+.cardTitle {
   font-family: title;
   font-size: clamp(20px, 3vw, 32px);
   font-weight: bold;
@@ -619,7 +619,7 @@ html {
   position: relative;
 }
 
-.aboutSectionTitle::after {
+.cardTitle::after {
   content: " ";
   height: 30%;
   position: absolute;
@@ -630,19 +630,19 @@ html {
   transition: all 0.3s ease;
 }
 
-.aboutSectionTitle.impact::after {
+.cardTitle.impact::after {
   background-color: var(--accentDark);
 }
 
-.aboutSectionTitle.world::after {
+.cardTitle.world::after {
   background-color: var(--wildCard);
 }
 
-.aboutSectionTitle.tech::after {
+.cardTitle.tech::after {
   background-color: var(--accent);
 }
 
-.aboutSectionTitle.goals::after {
+.cardTitle.goals::after {
   background-color: var(--accentMid);
 }
 
@@ -668,7 +668,7 @@ html {
   transition: all 0.3s ease;
 }
 
-.aboutSection::after {
+.card::after {
   content: "";
   position: absolute;
   top: 15px;
@@ -679,21 +679,21 @@ html {
   transition: all 0.3s ease;
 }
 
-.aboutSection:nth-child(1)::after {
+.card:nth-child(1)::after {
   background: var(--wildCard);
 }
 
-.aboutSection:nth-child(2)::after {
+.card:nth-child(2)::after {
   background: var(--accent);
   border-radius: 0;
 }
 
-.aboutSection:nth-child(3)::after {
+.card:nth-child(3)::after {
   background: var(--accentMid);
   border-radius: 30%;
 }
 
-.aboutSection:hover::after {
+.card:hover::after {
   transform: scale(1.5) rotate(180deg);
 }
 
@@ -1067,21 +1067,9 @@ html {
     border-radius: 25%;
   }
 
-  .aboutContainer {
-    display: flex;
-    flex-direction: column; /* Stack content vertically */
-    width: 90%;
-    max-width: 1200px; /* Optional: set a max width for very large screens */
-    margin: 0 auto; /* Center the container horizontally */
-    padding: 2rem 0; /* Add some vertical padding */
-  }
-
   .aboutLeftColumn,
   .aboutRightColumn {
     gap: 25px;
-  }
-
-  .aboutSection {
   }
 
   .aboutSectionTitle {

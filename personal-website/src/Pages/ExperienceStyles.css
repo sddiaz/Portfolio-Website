@@ -1,0 +1,651 @@
+/* ==========================================================================
+   EXPERIENCE SECTION
+   ========================================================================== */
+
+.experience {
+  width: 100%;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+  background: var(--background);
+}
+
+.experience-container {
+  max-width: 900px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.experience-cards-container {
+  height: clamp(600px, 70vh, 800px); 
+  position: relative; 
+  display: flex;
+}
+
+.experience-cards-container > * {
+  position: absolute; 
+}
+
+/* ==========================================================================
+   EXPERIENCE HEADER
+   ========================================================================== */
+
+.experience-header {
+  text-align: left;
+}
+
+.experience-title {
+  font-family: title;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: bold;
+  color: var(--mainText);
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.experience-highlight {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 0.3rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--subText);
+  font-weight: 400;
+  font-size: 0.7em;
+  white-space: nowrap;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.experience-highlight:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.experience-divider {
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--accent),
+    var(--wildCard),
+    transparent
+  );
+  border-radius: 2px;
+  margin-bottom: 2rem;
+}
+
+/* ==========================================================================
+   EXPERIENCE CARDS
+   ========================================================================== */
+
+.experience-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  height: auto;
+  margin-bottom: 2rem;
+}
+
+.experience-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  border-color: var(--accent);
+}
+
+.experience-card::after {
+  content: "";
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  transition: all 0.3s ease;
+}
+
+.experience-card:hover::after {
+  transform: scale(1.5) rotate(180deg);
+  background: var(--wildCard);
+}
+
+/* ==========================================================================
+   JOB HEADER
+   ========================================================================== */
+
+.job-header {
+  margin-bottom: 2rem;
+}
+
+.job-title {
+  font-family: title;
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-weight: 600;
+  color: var(--mainText);
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+
+.job-role {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--subText);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.job-company {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--subText);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.job-dates {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--subText);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.job-divider {
+  height: 1px;
+  background: var(--accent);
+  width: 100%;
+  margin-top: 0.5rem;
+  opacity: 0.3;
+}
+
+/* ==========================================================================
+   JOB DETAILS
+   ========================================================================== */
+
+.job-details {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.details-location {
+  flex: 1;
+  min-width: 150px;
+  max-width: 200px;
+}
+
+.details-notables {
+  flex: 3;
+}
+
+.details-title {
+  font-family: title;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  font-weight: 600;
+  color: var(--mainText);
+  margin-bottom: 0.8rem;
+}
+
+.details-divider {
+  height: 1px;
+  background: var(--accent);
+  width: 100%;
+  margin-bottom: 1rem;
+  opacity: 0.3;
+}
+
+.location-tag {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--subText);
+  font-weight: 400;
+  font-size: 0.9rem;
+  display: inline-block;
+}
+
+/* ==========================================================================
+   NOTABLES LIST
+   ========================================================================== */
+
+.notables-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.notable-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border-left: 3px solid var(--accent);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.notable-item:nth-child(even) {
+  border-left-color: var(--wildCard);
+}
+
+.notable-item:nth-child(3n) {
+  border-left-color: var(--accentMid);
+}
+
+.notable-item:hover {
+  transform: translateX(8px) translateY(-2px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--accent);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.notable-item::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.notable-item:nth-child(even)::after {
+  background: var(--wildCard);
+  border-radius: 0;
+}
+
+.notable-item:nth-child(3n)::after {
+  background: var(--accentMid);
+  border-radius: 30%;
+}
+
+.notable-item:hover::after {
+  transform: scale(1.5) rotate(180deg);
+}
+
+.notable-bullet {
+  color: var(--subText);
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 0.1rem;
+  transition: all 0.3s ease;
+  opacity: 0.7;
+}
+
+.notable-text {
+  color: var(--subText);
+  line-height: 1.5;
+  flex: 1;
+  font-size: clamp(0.85rem, 2vw, 1rem);
+}
+
+/* ==========================================================================
+   NAVIGATION
+   ========================================================================== */
+
+.experience-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.nav-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  height: 35px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: var(--mainText);
+  font-size: 0.85rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.nav-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.nav-icon {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  transition: all 0.3s ease;
+}
+
+.nav-button:hover .nav-icon {
+  transform: scale(1.1);
+}
+
+.date-picker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: var(--mainText);
+  font-size: 0.9rem;
+  font-family: inherit;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  min-width: 200px;
+  justify-content: flex-start;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.date-picker:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.calendar-icon {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ==========================================================================
+   CAROUSEL COMPONENT
+   ========================================================================== */
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.carousel-track {
+  display: flex;
+  width: 100%;
+  transition: transform 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.carousel-card {
+  flex: 0 0 100%;
+  min-width: 100%;
+  padding: 2rem;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  margin-right: 0;
+  font-family: inherit;
+  color: var(--subText);
+  line-height: 1.5;
+  transition: all 0.3s ease;
+}
+
+.carousel-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   CAROUSEL NAVIGATION
+   ========================================================================== */
+
+.carousel-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  padding: 0 0.5rem;
+}
+
+.carousel-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: var(--mainText);
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--accent);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.carousel-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.carousel-btn:disabled:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================================================
+   CAROUSEL DOTS
+   ========================================================================== */
+
+.carousel-dots {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.carousel-dot.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: scale(1.3);
+  box-shadow: 0 0 10px rgba(var(--accent), 0.3);
+}
+
+.carousel-dot:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: var(--accent);
+  transform: scale(1.1);
+}
+
+.carousel-dot:nth-child(even).active {
+  background: var(--wildCard);
+  border-color: var(--wildCard);
+}
+
+.carousel-dot:nth-child(3n).active {
+  background: var(--accentMid);
+  border-color: var(--accentMid);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .experience {
+    padding: 2rem 1rem;
+  }
+
+  .experience-container {
+    gap: 1.5rem;
+  }
+
+  .experience-cards-container {
+    min-height: 400px;
+    padding: 1rem 0;
+  }
+
+  .experience-card {
+    padding: 1.5rem;
+  }
+
+  .job-details {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .details-location {
+    max-width: 100%;
+  }
+
+  .experience-navigation {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .nav-button {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .date-picker {
+    min-width: 160px;
+    padding: 0.4rem 1rem;
+  }
+
+  .notable-item {
+    padding: 0.8rem;
+  }
+
+  .notable-text {
+    font-size: 0.85rem;
+  }
+
+  /* Carousel responsive styles */
+  .carousel-card {
+    padding: 1.5rem;
+  }
+  
+  .carousel-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .carousel-dots {
+    gap: 0.4rem;
+  }
+
+  .carousel-dot {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .experience {
+    padding: 1.5rem 0.5rem;
+  }
+
+  .experience-title {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+  }
+
+  .job-title {
+    font-size: clamp(1rem, 4vw, 1.3rem);
+  }
+
+  .experience-navigation {
+    justify-content: center;
+  }
+
+  .nav-button,
+  .date-picker {
+    flex: 1;
+    min-width: auto;
+    justify-content: center;
+  }
+
+  .experience-cards-container {
+    min-height: 350px;
+  }
+
+  /* Carousel mobile styles */
+  .carousel-card {
+    padding: 1rem;
+  }
+
+  .carousel-nav {
+    padding: 0;
+  }
+
+  .carousel-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+}

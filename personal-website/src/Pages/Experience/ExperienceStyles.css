@@ -5,7 +5,7 @@
 .experience {
   width: 100%;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background: var(--background);
@@ -19,13 +19,13 @@
 }
 
 .experience-cards-container {
-  height: clamp(600px, 70vh, 800px); 
-  position: relative; 
+  height: clamp(600px, 70vh, 800px);
+  position: relative;
   display: flex;
 }
 
 .experience-cards-container > * {
-  position: absolute; 
+  position: absolute;
 }
 
 /* ==========================================================================
@@ -390,148 +390,6 @@
 }
 
 /* ==========================================================================
-   CAROUSEL COMPONENT
-   ========================================================================== */
-
-.carousel-container {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-
-.carousel-wrapper {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.carousel-track {
-  display: flex;
-  width: 100%;
-  transition: transform 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-
-.carousel-card {
-  flex: 0 0 100%;
-  min-width: 100%;
-  padding: 2rem;
-  box-sizing: border-box;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  margin-right: 0;
-  font-family: inherit;
-  color: var(--subText);
-  line-height: 1.5;
-  transition: all 0.3s ease;
-}
-
-.carousel-card:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: var(--accent);
-  transform: translateY(-2px);
-}
-
-/* ==========================================================================
-   CAROUSEL NAVIGATION
-   ========================================================================== */
-
-.carousel-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 1rem;
-  padding: 0 0.5rem;
-}
-
-.carousel-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  color: var(--mainText);
-  font-size: 16px;
-  font-weight: 600;
-  font-family: inherit;
-  cursor: pointer;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-}
-
-.carousel-btn:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: var(--accent);
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-.carousel-btn:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.carousel-btn:disabled:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: none;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-}
-
-/* ==========================================================================
-   CAROUSEL DOTS
-   ========================================================================== */
-
-.carousel-dots {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.carousel-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.1);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-}
-
-.carousel-dot.active {
-  background: var(--accent);
-  border-color: var(--accent);
-  transform: scale(1.3);
-  box-shadow: 0 0 10px rgba(var(--accent), 0.3);
-}
-
-.carousel-dot:hover:not(.active) {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: var(--accent);
-  transform: scale(1.1);
-}
-
-.carousel-dot:nth-child(even).active {
-  background: var(--wildCard);
-  border-color: var(--wildCard);
-}
-
-.carousel-dot:nth-child(3n).active {
-  background: var(--accentMid);
-  border-color: var(--accentMid);
-}
-
-/* ==========================================================================
    RESPONSIVE DESIGN
    ========================================================================== */
 
@@ -584,26 +442,6 @@
   .notable-text {
     font-size: 0.85rem;
   }
-
-  /* Carousel responsive styles */
-  .carousel-card {
-    padding: 1.5rem;
-  }
-  
-  .carousel-btn {
-    width: 36px;
-    height: 36px;
-    font-size: 14px;
-  }
-
-  .carousel-dots {
-    gap: 0.4rem;
-  }
-
-  .carousel-dot {
-    width: 6px;
-    height: 6px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -634,18 +472,4 @@
     min-height: 350px;
   }
 
-  /* Carousel mobile styles */
-  .carousel-card {
-    padding: 1rem;
-  }
-
-  .carousel-nav {
-    padding: 0;
-  }
-
-  .carousel-btn {
-    width: 32px;
-    height: 32px;
-    font-size: 12px;
-  }
 }

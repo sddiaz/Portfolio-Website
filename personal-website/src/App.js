@@ -9,120 +9,115 @@ import { Circle } from "react-awesome-shapes/dist/shapes/circle";
 import { Diamond } from "react-awesome-shapes/dist/shapes/diamond";
 import "./App.css";
 import YoutubeEmbed from "./Components/YoutubeEmbed.tsx";
-import Experience from "./Pages/Experience.tsx";
+import Experience from "./Pages/Experience/Experience.tsx";
 import EarthScene from "./Scenes/EarthScene";
 import SatelliteScene from "./Scenes/SatelliteScene";
 import UfoScene from "./Scenes/UfoScene";
 import "./styles/ParallaxEffect.scss";
+import Works from "./Pages/Work/Work.tsx";
+import Footer from "./Components/Footer/Footer.tsx";
 
 const particlesConfig = {
-      background: {
-        color: {
-          value: "transparent",
-        },
+  background: {
+    color: {
+      value: "transparent",
+    },
+  },
+  fpsLimit: 120,
+  interactivity: {
+    events: {
+      onClick: {
+        enable: true,
+        mode: "push",
       },
-      fpsLimit: 120,
-      interactivity: {
-        events: {
-          onClick: {
-            enable: true,
-            mode: "push",
-          },
-          onHover: {
-            enable: true,
-            mode: "bubble",
-          },
-          resize: {
-            enable: true,
-          },
-        },
-        modes: {
-          push: {
-            quantity: 6,
-          },
-          bubble: {
-            distance: 250,
-            duration: 2,
-            size: 8,
-            opacity: 0.8,
-          },
-          repulse: {
-            distance: 200,
-            duration: 0.4,
-          },
-        },
+      onHover: {
+        enable: true,
+        mode: "bubble",
       },
-      particles: {
-        color: {
-          value: [
-            "#62ffdc",
-            "#d062ff",
-            "#1cc99e",
-            "#338573",
-            "#f3f3f3",
-            "#c9d2f5",
-          ], // Your CSS color variables
-        },
-        links: {
-          color: "#62ffdc", // Your accent color
-          distance: 120,
-          enable: true,
-          opacity: 0.15,
-          width: 0.5,
-        },
-        move: {
-          direction: "none",
-          enable: true,
-          outModes: {
-            default: "out",
-          },
-          random: true,
-          speed: {
-            min: 0.1,
-            max: 0.6, // Slightly slower for elegant movement
-          },
-          straight: false,
-        },
-        number: {
-          density: {
-            enable: true,
-            area: 800,
-          },
-          value: 150, // Adjusted for title page size
-        },
-        opacity: {
-          value: {
-            min: 0.1,
-            max: 1,
-          },
-          animation: {
-            enable: true,
-            speed: 1,
-            sync: false,
-            startValue: "random",
-            mode: "auto",
-          },
-        },
-        shape: {
-          type: "circle",
-        },
-        size: {
-          value: {
-            min: 0.5,
-            max: 3.5,
-          },
-          animation: {
-            enable: true,
-            speed: 2,
-            sync: false,
-            startValue: "random",
-            mode: "auto",
-          },
-        },
-        // Remove potentially unsupported properties
-        // twinkle, rotate, shadow, motion may not be supported in your version
+      resize: {
+        enable: true,
       },
-      detectRetina: true,
+    },
+    modes: {
+      push: {
+        quantity: 6,
+      },
+      bubble: {
+        distance: 250,
+        duration: 2,
+        size: 8,
+        opacity: 0.8,
+      },
+      repulse: {
+        distance: 200,
+        duration: 0.4,
+      },
+    },
+  },
+  particles: {
+    color: {
+      value: ["#62ffdc", "#d062ff", "#1cc99e", "#338573", "#f3f3f3", "#c9d2f5"], // Your CSS color variables
+    },
+    links: {
+      color: "#62ffdc", // Your accent color
+      distance: 120,
+      enable: true,
+      opacity: 0.15,
+      width: 0.5,
+    },
+    move: {
+      direction: "none",
+      enable: true,
+      outModes: {
+        default: "out",
+      },
+      random: true,
+      speed: {
+        min: 0.1,
+        max: 0.6, // Slightly slower for elegant movement
+      },
+      straight: false,
+    },
+    number: {
+      density: {
+        enable: true,
+        area: 800,
+      },
+      value: 150, // Adjusted for title page size
+    },
+    opacity: {
+      value: {
+        min: 0.1,
+        max: 1,
+      },
+      animation: {
+        enable: true,
+        speed: 1,
+        sync: false,
+        startValue: "random",
+        mode: "auto",
+      },
+    },
+    shape: {
+      type: "circle",
+    },
+    size: {
+      value: {
+        min: 0.5,
+        max: 3.5,
+      },
+      animation: {
+        enable: true,
+        speed: 2,
+        sync: false,
+        startValue: "random",
+        mode: "auto",
+      },
+    },
+    // Remove potentially unsupported properties
+    // twinkle, rotate, shadow, motion may not be supported in your version
+  },
+  detectRetina: true,
 };
 
 const ParticlesBackground = React.memo(() => {
@@ -140,7 +135,6 @@ const ParticlesBackground = React.memo(() => {
 
   return <Particles id="tsparticles" options={particlesConfig} />;
 });
-
 
 function App() {
   // Variables
@@ -176,10 +170,11 @@ function App() {
   ];
 
   const nerdFacts = [
-    "I've been doing video editing since I was 14",
+    "I've been video editing since I was 14",
     "My daily ride is a CBR500R motorcycle",
-    "I love Fujifilm strictly for the aesthetic",
+    "I love Fujifilm !",
     "I built a 7,500+ follower Instagram page around video edits in high school",
+    "My dream job title is 'Principle Frontend Engineer'",
     "I'm happy you read this far",
   ];
 
@@ -235,6 +230,12 @@ function App() {
 
   return (
     <div className="App" ref={composition}>
+      {/* Scroll Indicator */}
+      <div className="scroll-indicator">
+        <div className="scroll-line"></div>
+        <div className="scroll-text">Scroll to explore!</div>
+      </div>
+
       <div className="title">
         <div id="navbar" className="navbar">
           <div id="bigButton" className="navComponentBig">
@@ -456,7 +457,7 @@ function App() {
         </div>
         <div>
           {/* Abstract Section */}
-          <div className="card">
+          <div className="card abstract">
             <h2 className="cardTitle">Abstract</h2>
             <div className="aboutDivider"></div>
             <p className="aboutAbstract">
@@ -612,7 +613,10 @@ function App() {
       {/* PROJECTS SECTION */}
       <div id="Projects" className="Page">
         <div className="Where pageTitle">Featured Projects</div>
+        <Works />
       </div>
+
+      <Footer />
     </div>
   );
 }

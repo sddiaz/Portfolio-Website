@@ -60,59 +60,46 @@ html {
   gap: 1rem;
 }
 
-/* ==========================================================================
-     CURSOR COMPONENTS
-     ========================================================================== */
-
-.cursor {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  transition:
-    left 0.1s,
-    top 0.1s,
-    width 0.3s,
-    height 0.3s;
-  transform: translate(-50%, -50%);
-  background-color: var(--accent);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
+/* Scroll Indicator */
+.scroll-indicator {
+    position: fixed;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    z-index: 100;
 }
 
-.littleCursor {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  transform: translate(-50%, -50%);
-  transition:
-    width 0.3s,
-    height 0.3s;
-  background-color: var(--accentDark);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
+.scroll-line {
+    width: 2px;
+    height: 80px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    position: relative;
 }
 
-.large-cursor {
-  width: 60px;
-  height: 60px;
-  opacity: 0.1;
-  transition:
-    opacity 0.3s,
-    width 0.3s,
-    height 0.3s;
-  background-color: #d062ff;
-  z-index: 9999;
+.scroll-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: scrollDot 2s ease-in-out infinite;
 }
 
-.littleLarge-cursor {
-  width: 10px;
-  height: 10px;
-  transition:
-    width 0.3s,
-    height 0.3s;
-  z-index: 9999;
+.scroll-text {
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    font-size: 12px;
+    color: var(--subText);
+    font-family: title;
+    opacity: 0.7;
 }
 
 /* ==========================================================================
@@ -581,8 +568,13 @@ html {
   gap: 40px;
 }
 
+.abstract {
+  background: Red;
+}
+
 .card {
   margin: 10px 20px;
+  max-width: 100%;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   border-radius: 25px;

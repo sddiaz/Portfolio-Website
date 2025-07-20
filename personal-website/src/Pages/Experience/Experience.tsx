@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as Icon from "devicons-react";
 import "./ExperienceStyles.css";
-import "../App.css";
+import "../../App.css";
 import _Draggable from "gsap/Draggable";
 
 const Experience = () => {
@@ -178,15 +178,9 @@ const Experience = () => {
 
     <div className="experience-content">
       {isMobileView ? (
-        // Mobile Carousel Layout
-        <div>
-            <div 
-              className="carousel-track"
-              style={{
-                transform: `translateX(-${currentIndex * 100}%)`,
-                transition: 'transform 0.3s ease-in-out'
-              }}
-            >
+        // Mobile Layout
+        <div className="mobile-container">
+            <div>
               {experienceData.map((experience, index) => {
                 const { role, company, dates, tools, location, notables } = experience;
                 
@@ -252,35 +246,6 @@ const Experience = () => {
                 );
               })}
             </div>
-          
-          {/* Carousel Navigation */}
-          <div className="carousel-nav">
-            <button 
-              className="carousel-btn carousel-prev"
-              onClick={() => setCurrentIndex(Math.max(0, currentIndex - 1))}
-              disabled={currentIndex === 0}
-            >
-              ‹
-            </button>
-            
-            <div className="carousel-dots">
-              {experienceData.map((_, index) => (
-                <button
-                  key={index}
-                  className={`carousel-dot ${index === currentIndex ? 'active' : ''}`}
-                  onClick={() => setCurrentIndex(index)}
-                />
-              ))}
-            </div>
-            
-            <button 
-              className="carousel-btn carousel-next"
-              onClick={() => setCurrentIndex(Math.min(experienceData.length - 1, currentIndex + 1))}
-              disabled={currentIndex === experienceData.length - 1}
-            >
-              ›
-            </button>
-          </div>
         </div>
       ) : (
         // Desktop Stack Layout

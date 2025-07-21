@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
 import * as Icon from "devicons-react";
-import "./ExperienceStyles.css";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import "../../App.css";
-import _Draggable from "gsap/Draggable";
+import "./ExperienceStyles.css";
 
 const Experience = () => {
+  
+  //#region Variables
+
   const toolIconMap = {
     React: Icon.ReactOriginal,
     Python: Icon.PythonOriginal,
@@ -65,53 +67,40 @@ const Experience = () => {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
   const [isMobileView, setIsMobileView] = useState(false);
-  const currentExperience = experienceData[currentIndex];
+  const [containerHeight, setContainerHeight] = useState("600px");
+  const cardsContainerRef = useRef(null);
 
-  // Check viewport width on mount and resize
-  useEffect(() => {
-    const checkViewport = () => {
-      setIsMobileView(window.innerWidth < 1080);
-    };
+  //#endregion
 
-    // Check on mount
-    checkViewport();
+  //#region Functions
 
-    // Add resize listener
-    window.addEventListener('resize', checkViewport);
+  const calculateContainerHeight = useCallback(() => {
+    if (!cardsContainerRef.current || isMobileView) return;
 
-    // Cleanup listener on unmount
-    return () => window.removeEventListener('resize', checkViewport);
-  }, []);
+    const cards = (cardsContainerRef.current as any)?.children;
+    if (cards.length === 0) return;
 
-  const handleNext = () => {
-    if (isAnimating || currentIndex >= experienceData.length - 1) return;
+    // Get the height of the tallest card
+    let maxCardHeight = 0;
+    for (let card of cards) {
+      const cardHeight = card.offsetHeight;
+      if (cardHeight > maxCardHeight) {
+        maxCardHeight = cardHeight;
+      }
+    }
 
-    setIsAnimating(true);
-    setCurrentIndex((prev) => prev + 1);
+    // Add some padding for the stacking effect
+    // Adjust this based on your stacking offset
+    const stackingOffset = (cards.length - 1) * 20; // 20px per card
+    const totalHeight = maxCardHeight + stackingOffset + 50; // 50px extra padding
 
-    setTimeout(() => {
-      setIsAnimating(false);
-    }, 600);
-  };
-
-  const handlePrevious = () => {
-    if (isAnimating || currentIndex <= 0) return;
-
-    setIsAnimating(true);
-    setCurrentIndex((prev) => prev - 1);
-
-    setTimeout(() => {
-      setIsAnimating(false);
-    }, 600);
-  };
-
-  const { role, company, dates } = currentExperience;
+    setContainerHeight(`${totalHeight}px`);
+  }, [isMobileView]);
 
   const getCardStyle = (index) => {
     const position = index - currentIndex;
-    
+
     // Responsive spacing using clamp() - scales between 50px (mobile) to 120px (desktop)
     const spacing = `clamp(50px, 8vw, 120px)`;
     const doubleSpacing = `clamp(100px, 16vw, 240px)`;
@@ -159,7 +148,9 @@ const Experience = () => {
     } else {
       // Cards too far away - hidden
       return {
-        transform: `translateX(calc(${position > 0 ? '1' : '-1'} * clamp(75px, 12vw, 150px))) translateY(clamp(45px, 6vw, 60px)) rotateY(${
+        transform: `translateX(calc(${
+          position > 0 ? "1" : "-1"
+        } * clamp(75px, 12vw, 150px))) translateY(clamp(45px, 6vw, 60px)) rotateY(${
           position > 0 ? -35 : 35
         }deg) scale(0.8)`,
         zIndex: 0,
@@ -169,163 +160,212 @@ const Experience = () => {
     }
   };
 
+  // Use effect to recalculate on data or view changes
+  useEffect(() => {
+    calculateContainerHeight();
+
+    // Recalculate on window resize
+    const handleResize = () => {
+      setTimeout(calculateContainerHeight, 100);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [calculateContainerHeight]);
+
+  // Check viewport width on mount and resize
+  useEffect(() => {
+    const checkViewport = () => {
+      setIsMobileView(window.innerWidth < 1080);
+    };
+
+    // Check on mount
+    checkViewport();
+
+    // Add resize listener
+    window.addEventListener("resize", checkViewport);
+
+    // Cleanup listener on unmount
+    return () => window.removeEventListener("resize", checkViewport);
+  }, []);
+
+  //#endregion
+
+  //#region Component
+
   return (
-<div className="experience">
-  <div className="experience-container">
-    <div className="experience-header">
-      <div className="experience-divider"></div>
-    </div>
+    <div id="Experience" className="Page">
+      <div className="What pageTitle">
+        Experience <div className="regular"> and </div> Skills
+      </div>
+      <div className="experience">
+        <div className="experience-container">
+          <div className="experience-header">
+            <div className="experience-divider"></div>
+          </div>
 
-    <div className="experience-content">
-      {isMobileView ? (
-        // Mobile Layout
-        <div className="mobile-container">
-            <div>
-              {experienceData.map((experience, index) => {
-                const { role, company, dates, tools, location, notables } = experience;
-                
-                return (
-                  <div className="card" key={index}>
-                    <div className="job-header">
-                      <h2 className="job-title">
-                        <span className="job-role">{role}</span> at{" "}
-                        <span className="job-company">{company}</span> from{" "}
-                        <span className="job-dates">{dates}</span>
-                      </h2>
-                      <div className="job-divider"></div>
-                    </div>
+          <div className="experience-content">
+            {isMobileView ? (
+              // Mobile Layout
+              <div>
+                <div>
+                  {experienceData.map((experience, index) => {
+                    const { role, company, dates, tools, location, notables } =
+                      experience;
 
-                    <div className="job-details">
-                      <div>
-                        <div className="details-location">
-                          <h3 className="details-title">Tools</h3>
-                          <div className="details-divider"></div>
-                          <div
-                            style={{
-                              display: "flex",
-                              gap: "2px",
-                              flexWrap: "wrap",
-                            }}
-                          >
-                            {tools.map((tool) => {
-                              const IconComponent = toolIconMap[tool];
-                              return (
-                                <div
-                                  className="location-tag"
-                                  title={tool}
-                                  key={tool}
-                                >
-                                  {IconComponent && <IconComponent />}
-                                </div>
-                              );
-                            })}
+                    return (
+                      <div className="card" key={index}>
+                        <div className="job-header">
+                          <h2 className="job-title">
+                            <span className="job-role">{role}</span> at{" "}
+                            <span className="job-company">{company}</span> from{" "}
+                            <span className="job-dates">{dates}</span>
+                          </h2>
+                          <div className="job-divider"></div>
+                        </div>
+
+                        <div className="job-details">
+                          <div>
+                            <div className="details-location">
+                              <h3 className="details-title">Tools</h3>
+                              <div className="details-divider"></div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  gap: "2px",
+                                  flexWrap: "wrap",
+                                }}
+                              >
+                                {tools.map((tool) => {
+                                  const IconComponent = toolIconMap[tool];
+                                  return (
+                                    <div
+                                      className="location-tag"
+                                      title={tool}
+                                      key={tool}
+                                    >
+                                      {IconComponent && <IconComponent />}
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </div>
+
+                            <div className="details-location">
+                              <h3 className="details-title">Location</h3>
+                              <div className="details-divider"></div>
+                              <div className="location-tag">{location}</div>
+                            </div>
+                          </div>
+
+                          <div className="details-notables">
+                            <h3 className="details-title">Accomplishments</h3>
+                            <div className="details-divider"></div>
+                            <ul className="notables-list">
+                              {notables.map((notable, index) => (
+                                <li key={index} className="notable-item">
+                                  <span className="notable-bullet">•</span>
+                                  <span className="notable-text">
+                                    {notable}
+                                  </span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ) : (
+              // Desktop Stack Layout
+              <div
+                className="experience-cards-container"
+                ref={cardsContainerRef}
+                style={{ height: isMobileView ? "auto" : containerHeight }}
+              >
+                {experienceData.map((experience, index) => {
+                  const cardStyle = getCardStyle(index);
+                  const { role, company, dates, tools, location, notables } =
+                    experience;
+
+                  return (
+                    <div
+                      className="card"
+                      style={{ ...cardStyle }}
+                      key={index}
+                      onClick={() => setCurrentIndex(index)}
+                    >
+                      <div className="job-header">
+                        <h2 className="job-title">
+                          <span className="job-role">{role}</span> at{" "}
+                          <span className="job-company">{company}</span> from{" "}
+                          <span className="job-dates">{dates}</span>
+                        </h2>
+                        <div className="job-divider"></div>
+                      </div>
+
+                      <div className="job-details">
+                        <div>
+                          <div className="details-location">
+                            <h3 className="details-title">Tools</h3>
+                            <div className="details-divider"></div>
+                            <div
+                              style={{
+                                display: "flex",
+                                gap: "2px",
+                                flexWrap: "wrap",
+                              }}
+                            >
+                              {tools.map((tool) => {
+                                const IconComponent = toolIconMap[tool];
+                                return (
+                                  <div
+                                    className="location-tag"
+                                    title={tool}
+                                    key={tool}
+                                  >
+                                    {IconComponent && <IconComponent />}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+
+                          <div className="details-location">
+                            <h3 className="details-title">Location</h3>
+                            <div className="details-divider"></div>
+                            <div className="location-tag">{location}</div>
                           </div>
                         </div>
 
-                        <div className="details-location">
-                          <h3 className="details-title">Location</h3>
+                        <div className="details-notables">
+                          <h3 className="details-title">Accomplishments</h3>
                           <div className="details-divider"></div>
-                          <div className="location-tag">{location}</div>
+                          <ul className="notables-list">
+                            {notables.map((notable, index) => (
+                              <li key={index} className="notable-item">
+                                <span className="notable-bullet">•</span>
+                                <span className="notable-text">{notable}</span>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
                       </div>
-
-                      <div className="details-notables">
-                        <h3 className="details-title">Accomplishments</h3>
-                        <div className="details-divider"></div>
-                        <ul className="notables-list">
-                          {notables.map((notable, index) => (
-                            <li key={index} className="notable-item">
-                              <span className="notable-bullet">•</span>
-                              <span className="notable-text">{notable}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
-        </div>
-      ) : (
-        // Desktop Stack Layout
-        <div className="experience-cards-container">
-          {experienceData.map((experience, index) => {
-            const cardStyle = getCardStyle(index);
-            const { role, company, dates, tools, location, notables } = experience;
-
-            return (
-              <div
-                className="card"
-                style={{ ...cardStyle }}
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-              >
-                <div className="job-header">
-                  <h2 className="job-title">
-                    <span className="job-role">{role}</span> at{" "}
-                    <span className="job-company">{company}</span> from{" "}
-                    <span className="job-dates">{dates}</span>
-                  </h2>
-                  <div className="job-divider"></div>
-                </div>
-
-                <div className="job-details">
-                  <div>
-                    <div className="details-location">
-                      <h3 className="details-title">Tools</h3>
-                      <div className="details-divider"></div>
-                      <div
-                        style={{
-                          display: "flex",
-                          gap: "2px",
-                          flexWrap: "wrap",
-                        }}
-                      >
-                        {tools.map((tool) => {
-                          const IconComponent = toolIconMap[tool];
-                          return (
-                            <div
-                              className="location-tag"
-                              title={tool}
-                              key={tool}
-                            >
-                              {IconComponent && <IconComponent />}
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-
-                    <div className="details-location">
-                      <h3 className="details-title">Location</h3>
-                      <div className="details-divider"></div>
-                      <div className="location-tag">{location}</div>
-                    </div>
-                  </div>
-
-                  <div className="details-notables">
-                    <h3 className="details-title">Accomplishments</h3>
-                    <div className="details-divider"></div>
-                    <ul className="notables-list">
-                      {notables.map((notable, index) => (
-                        <li key={index} className="notable-item">
-                          <span className="notable-bullet">•</span>
-                          <span className="notable-text">{notable}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
-            );
-          })}
+            )}
+          </div>
         </div>
-      )}
+      </div>
     </div>
-  </div>
-</div>
   );
+
+  //#endregion
+
 };
 
 export default Experience;

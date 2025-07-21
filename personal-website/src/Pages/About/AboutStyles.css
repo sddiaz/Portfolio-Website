@@ -1,0 +1,469 @@
+/* ==========================================================================
+   ABOUT SECTION
+   ========================================================================== */
+
+#About {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* ==========================================================================
+     LAYOUT UTILITIES
+     ========================================================================== */
+
+.flexRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.flexRow .flexCol {
+  flex: 1;
+  max-width: calc(50% - 1rem);
+}
+
+.flexCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ==========================================================================
+     CARD COMPONENTS
+     ========================================================================== */
+
+.card {
+  margin: 10px 20px;
+  max-width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  border-color: var(--accent);
+}
+
+.card:hover .aboutSectionTitle {
+  color: var(--accent);
+}
+
+.card:hover .aboutAbstract,
+.card:hover .goalText,
+.card:hover .nerdFact {
+  color: var(--subText);
+}
+
+.cardTitle {
+  font-family: title;
+  font-size: clamp(20px, 3vw, 32px);
+  font-weight: bold;
+  margin: 0 0 15px 0;
+  color: var(--mainText);
+  position: relative;
+}
+
+.cardTitle::after {
+  content: " ";
+  height: 30%;
+  position: absolute;
+  left: 0;
+  top: 60%;
+  width: calc(100%);
+  z-index: -1;
+  transition: all 0.3s ease;
+}
+
+.cardTitle.impact::after {
+  background-color: var(--accentDark);
+}
+
+.cardTitle.world::after {
+  background-color: var(--wildCard);
+}
+
+.cardTitle.tech::after {
+  background-color: var(--accent);
+}
+
+.cardTitle.goals::after {
+  background-color: var(--accentMid);
+}
+
+.aboutDivider {
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--accent),
+    var(--wildCard),
+    transparent
+  );
+  margin-bottom: 20px;
+  border-radius: 3px;
+}
+
+/* Card decorative elements */
+.card::after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.card:nth-child(1)::after {
+  background: var(--wildCard);
+}
+
+.card:nth-child(2)::after {
+  background: var(--accent);
+  border-radius: 0;
+}
+
+.card:nth-child(3)::after {
+  background: var(--accentMid);
+  border-radius: 30%;
+}
+
+.card:hover::after {
+  transform: scale(1.5) rotate(180deg);
+}
+
+/* ==========================================================================
+     ABSTRACT SECTION
+     ========================================================================== */
+
+.aboutAbstract {
+  font-size: clamp(14px, 2vw, 18px);
+  line-height: 1.6;
+  color: var(--mainText);
+  text-align: justify;
+  text-indent: 20px;
+  margin: 0;
+  transition: all 0.3s ease;
+}
+
+/* ==========================================================================
+     GOALS SECTION
+     ========================================================================== */
+
+.goalsContainer {
+  max-height: 250px;
+  overflow-y: auto;
+  padding-right: 12px;
+}
+
+.goalsContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.goalsContainer::-webkit-scrollbar-track {
+  background: var(--background);
+  border-radius: 10px;
+}
+
+.goalsContainer::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, var(--accent), var(--wildCard));
+  border-radius: 10px;
+  border: 2px solid var(--background);
+}
+
+.goalsContainer::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, var(--wildCard), var(--accent));
+}
+
+.goalsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.goalItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.goalItem:hover {
+  transform: translateX(5px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--accent);
+}
+
+.goalItem.completed {
+  text-decoration: line-through;
+  opacity: 0.7;
+  background: rgba(7, 59, 76, 0.5);
+}
+
+.goalItem.completed .goalText {
+  color: var(--subText);
+}
+
+.goalText {
+  font-size: clamp(12px, 2vw, 16px);
+  flex: 1;
+  color: var(--mainText);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.checkIcon {
+  color: var(--accent);
+  font-size: 20px;
+  margin-left: 12px;
+  transition: all 0.3s ease;
+}
+
+.goalItem:hover .checkIcon {
+  color: var(--wildCard);
+  transform: scale(1.2);
+}
+
+/* ==========================================================================
+     SOCIALS SECTION
+     ========================================================================== */
+
+.socialsContainer {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.socialButton {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  color: var(--mainText);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.socialButton:hover {
+  transform: translateY(-3px) scale(1.1);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--accent);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  color: var(--accent);
+}
+
+.socialButton svg {
+  font-size: 24px;
+  transition: all 0.3s ease;
+}
+
+.socialButton:hover svg {
+  transform: rotate(15deg);
+}
+
+/* ==========================================================================
+     SPOTIFY SECTION
+     ========================================================================== */
+
+.spotifyContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.spotifyEmbed {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s ease;
+}
+
+.spotifyEmbed:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  border-color: var(--accent);
+}
+
+/* ==========================================================================
+     NERD FACTS SECTION
+     ========================================================================== */
+
+.nerdFactsSection {
+  margin-top: 0;
+}
+
+.nerdFactsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.nerdFact {
+  font-size: clamp(13px, 2vw, 16px);
+  line-height: 1.6;
+  color: var(--mainText);
+  padding: 20px 25px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 15px;
+  border-left: 3px solid var(--accent);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.nerdFact::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.nerdFact:nth-child(even)::after {
+  background: var(--wildCard);
+  border-radius: 0;
+}
+
+.nerdFact:nth-child(3n)::after {
+  background: var(--accentMid);
+  border-radius: 30%;
+}
+
+.nerdFact:hover {
+  transform: translateX(8px) translateY(-2px);
+  background: rgba(255, 255, 255, 0.08);
+  border-left-color: var(--wildCard);
+  border-color: var(--accent);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.nerdFact:hover::after {
+  transform: scale(1.5) rotate(180deg);
+}
+
+.nerdFact::before {
+  content: "▸ ";
+  color: var(--accent);
+  font-weight: bold;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.nerdFact:hover::before {
+  color: var(--wildCard);
+  transform: scale(1.2);
+}
+
+/* ==========================================================================
+     RESPONSIVE DESIGN - ABOUT SECTION
+     ========================================================================== */
+
+@media (max-width: 1080px) or (max-height: 1079px) {
+  .aboutContainer .flexRow {
+    justify-content: start;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .aboutContainer .flexRow .flexCol {
+    flex: none;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .aboutLeftColumn,
+  .aboutRightColumn {
+    gap: 25px;
+  }
+
+  .aboutSectionTitle {
+    font-size: clamp(18px, 4vw, 24px);
+  }
+
+  .aboutAbstract {
+    font-size: clamp(12px, 3vw, 16px);
+    text-indent: 0;
+  }
+
+  .goalItem {
+    padding: 12px 15px;
+  }
+
+  .goalText {
+    font-size: clamp(11px, 3vw, 14px);
+  }
+
+  .socialButton {
+    width: 45px;
+    height: 45px;
+  }
+
+  .socialButton svg {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutLeftColumn,
+  .aboutRightColumn {
+    gap: 20px;
+  }
+
+  .aboutSection {
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .aboutSectionTitle {
+    font-size: clamp(16px, 5vw, 20px);
+  }
+
+  .socialsContainer {
+    gap: 15px;
+  }
+
+  .socialButton {
+    width: 40px;
+    height: 40px;
+  }
+
+  .nerdFact {
+    padding: 15px 20px;
+  }
+}

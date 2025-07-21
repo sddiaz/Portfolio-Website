@@ -1,10 +1,133 @@
 /* ==========================================================================
-   WORKS SECTION
+   PROJECTS/WORK SECTION
    ========================================================================== */
+
+/* Enhanced Title Section */
+.title-with-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.current-project-info {
+    position: relative;
+}
+
+.info-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, rgba(98, 255, 220, 0.1), rgba(98, 255, 220, 0.2));
+    border: 1px solid rgba(98, 255, 220, 0.3);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.info-badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(98, 255, 220, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.info-badge:hover::before {
+    left: 100%;
+}
+
+.info-badge:hover {
+    background: linear-gradient(135deg, rgba(98, 255, 220, 0.2), rgba(98, 255, 220, 0.3));
+    border-color: var(--accent);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(98, 255, 220, 0.25);
+}
+
+.info-icon {
+    font-size: 16px !important;
+    color: var(--accent);
+    transition: transform 0.3s ease;
+}
+
+.info-badge:hover .info-icon {
+    transform: rotate(15deg);
+}
+
+.info-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--mainText);
+    white-space: nowrap;
+    font-family: title;
+}
+
+.external-icon {
+    font-size: 14px !important;
+    color: var(--accent);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.info-badge:hover .external-icon {
+    opacity: 1;
+    transform: translate(2px, -2px);
+}
+
+/* Custom Tooltip */
+.custom-tooltip {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 1000;
+    opacity: 0;
+    animation: tooltipFadeIn 0.3s ease forwards;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(98, 255, 220, 0.3);
+}
+
+.custom-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid rgba(0, 0, 0, 0.9);
+}
+
+@keyframes tooltipFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
 
 .works-container {
     position: relative;
-    padding: 80px 40px;
+    padding: 10px;
     min-height: 100vh;
     overflow: hidden;
 }
@@ -85,7 +208,7 @@
     display: flex;
     justify-content: center;
     gap: 20px;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
     flex-wrap: wrap;
 }
 
@@ -143,6 +266,27 @@
 }
 
 /* Projects Grid */
+
+.project-card.in-progress {
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.3);
+}
+
+.progress-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--accent);
+  color: color;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 10;
+}
+
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -434,10 +578,6 @@
 
     .project-info {
         padding: 20px;
-    }
-
-    .scroll-indicator {
-        display: none;
     }
 
     .floating-shape {

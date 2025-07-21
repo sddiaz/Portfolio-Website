@@ -48,7 +48,7 @@ This project follows a **component-based architecture** using React. The structu
 ## 📂 Key Components
 
 ### 3D Models
-- **Earth**: [Earth.tsx](src/Components/Earth.tsx) - Interactive 3D Earth model rendered using `react-three-fiber`.
+- **Earth**: [Earth.tsx]([src/Components/Earth.tsx](https://github.com/sddiaz/Personal-Website/blob/main/personal-website/src/Components/Earth.tsx)) - Interactive 3D Earth model rendered using `react-three-fiber`.
 - **Satellite**: [Satellite.tsx](src/Components/Satellite.tsx) - Satellite model with animations.
 - **UFO**: [Ufo.tsx](src/Components/Ufo.tsx) - UFO model with dynamic lighting and effects.
 

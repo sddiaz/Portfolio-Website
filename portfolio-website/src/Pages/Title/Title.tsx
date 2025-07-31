@@ -180,6 +180,21 @@ const Title = () => {
 
   const particlesConfigRef = useRef(particlesConfig);
 
+  useEffect(() => {
+    const handleResize = () => {
+      // Close menu when screen size changes to prevent teleporting
+      if (anchorEl) {
+        setAnchorEl(null);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [anchorEl]);
+
   // Initialize particles engine
   useEffect(() => {
     initParticlesEngine(async (engine) => {
@@ -237,7 +252,7 @@ const Title = () => {
       <div id="navbar" className="navbar">
         <div id="bigButton" className="navComponentBig">
           <button
-            className={open ? "btn btnActive mouse menuButton" : "btn mouse"}
+            className={open ? "btn mouse" : "btn mouse"}
             onClick={handleClick}
             id="aboutBtn"
           >

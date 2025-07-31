@@ -122,7 +122,9 @@
   margin-bottom: 2rem;
 }
 
-.job-title {
+.job-title,
+.job-title > * {
+  text-wrap: wrap;
   font-family: title;
   font-size: clamp(1.2rem, 3vw, 1.8rem);
   font-weight: 600;
@@ -455,6 +457,16 @@
 
   .job-title {
     font-size: clamp(1rem, 4vw, 1.3rem);
+    text-align: left; 
+  }
+
+  .job-role,
+  .job-company,
+  .job-dates {
+    text-wrap: wrap;
+    background: none;
+    border: none;
+    padding: 0;
   }
 
   .experience-navigation {
@@ -471,5 +483,4 @@
   .experience-cards-container {
     min-height: 350px;
   }
-
 }

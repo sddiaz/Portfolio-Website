@@ -4,7 +4,8 @@ import YoutubeEmbed from "../../Components/YoutubeEmbed.tsx";
 import "./AboutStyles.css";
 
 const About = () => {
-  
+  //#region Variables
+
   const lifeGoals = [
     { text: "Earn a B.S. in Computer Engineering", completed: true },
     { text: "Land first Software Engineering role", completed: true },
@@ -22,17 +23,25 @@ const About = () => {
   ];
 
   const nerdFacts = [
-    "I've been video editing since I was 14",
+    "I started video editing at age 14",
     "My daily ride is a CBR500R motorcycle",
     "I love Fujifilm !",
     "I built a 7,500+ follower Instagram page around video edits in high school",
     "My dream job title is 'Principle Frontend Engineer'",
-    "I'm happy you read this far",
+    "I'm happy you read this far :)",
   ];
+
+  //#endregion
+
+  //#region Functions
 
   const handleSocialClick = (url) => {
     window.open(url, "_blank");
   };
+
+  //#endregion
+
+  //#region Component
 
   return (
     <div id="About" className="Page">
@@ -52,122 +61,127 @@ const About = () => {
             creative technologies.
           </p>
         </div>
-
-        <div className="flexRow">
-          <div className="flexCol">
-            {/* Life Goals Section */}
-            <div className="card">
-              <h2 className="cardTitle">Bucket List</h2>
-              <div className="aboutDivider"></div>
-              <div className="goalsContainer">
-                <ul className="goalsList">
-                  {lifeGoals.map((goal, index) => (
-                    <li
-                      key={index}
-                      className={`goalItem ${
-                        goal.completed ? "completed" : ""
-                      }`}
-                    >
-                      <span className="goalText">{goal.text}</span>
-                      {goal.completed && <CheckCircle className="checkIcon" />}
+        <div className="aboutContainer">
+          <div className="flexRow">
+            <div className="flexCol">
+              {/* Life Goals Section */}
+              <div className="card">
+                <h2 className="cardTitle">Bucket List</h2>
+                <div className="aboutDivider"></div>
+                <div className="goalsContainer">
+                  <ul className="goalsList">
+                    {lifeGoals.map((goal, index) => (
+                      <li
+                        key={index}
+                        className={`goalItem ${
+                          goal.completed ? "completed" : ""
+                        }`}
+                      >
+                        <span className="goalText">{goal.text}</span>
+                        {goal.completed && (
+                          <CheckCircle className="checkIcon" />
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              {/* Nerd Facts Section - Full Width */}
+              <div className="card">
+                <h2 className="cardTitle">Nerd facts & random stuff</h2>
+                <div className="aboutDivider"></div>
+                <ul className="nerdFactsList">
+                  {nerdFacts.map((fact, index) => (
+                    <li key={index} className="nerdFact">
+                      {fact}
                     </li>
                   ))}
                 </ul>
               </div>
             </div>
-            {/* Nerd Facts Section - Full Width */}
-            <div className="card">
-              <h2 className="cardTitle">Nerd facts & random stuff</h2>
-              <div className="aboutDivider"></div>
-              <ul className="nerdFactsList">
-                {nerdFacts.map((fact, index) => (
-                  <li key={index} className="nerdFact">
-                    {fact}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
 
-          <div className="flexCol">
-            {/* Socials Section */}
-            <div className="card">
-              <h2 className="cardTitle">Socials</h2>
-              <div className="aboutDivider"></div>
-              <div className="socialsContainer">
-                <button
-                  className="socialButton mouse"
-                  onClick={() =>
-                    handleSocialClick(
-                      "https://www.linkedin.com/in/santiagoddiaz"
-                    )
-                  }
-                >
-                  <LinkedIn />
-                </button>
-                <button
-                  className="socialButton mouse"
-                  onClick={() => handleSocialClick("https://github.com/sddiaz")}
-                >
-                  <GitHub />
-                </button>
-                <button
-                  className="socialButton mouse"
-                  onClick={() =>
-                    handleSocialClick("https://www.instagram.com/cautified")
-                  }
-                >
-                  <Instagram />
-                </button>
+            <div className="flexCol">
+              {/* Socials Section */}
+              <div className="card">
+                <h2 className="cardTitle">Socials</h2>
+                <div className="aboutDivider"></div>
+                <div className="socialsContainer">
+                  <button
+                    className="socialButton mouse"
+                    onClick={() =>
+                      handleSocialClick(
+                        "https://www.linkedin.com/in/santiagoddiaz"
+                      )
+                    }
+                  >
+                    <LinkedIn />
+                  </button>
+                  <button
+                    className="socialButton mouse"
+                    onClick={() =>
+                      handleSocialClick("https://github.com/sddiaz")
+                    }
+                  >
+                    <GitHub />
+                  </button>
+                  <button
+                    className="socialButton mouse"
+                    onClick={() =>
+                      handleSocialClick("https://www.instagram.com/cautified")
+                    }
+                  >
+                    <Instagram />
+                  </button>
+                </div>
               </div>
-            </div>
 
-            {/* Spotify Section */}
-            <div className="card">
-              <h2 className="cardTitle">Playlist</h2>
-              <div className="aboutDivider"></div>
-              <div className="spotifyContainer">
-                <iframe
-                  title="marias"
-                  style={{ borderRadius: "12px" }}
-                  src="https://open.spotify.com/embed/track/1ShRHPAiiIrh0arZbSFmx1?utm_source=generator&theme=0"
-                  width="100%"
-                  height="152"
-                  frameBorder="0"
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                  loading="lazy"
-                ></iframe>
+              {/* Spotify Section */}
+              <div className="card">
+                <h2 className="cardTitle">Playlist</h2>
+                <div className="aboutDivider"></div>
+                <div className="spotifyContainer">
+                  <iframe
+                    title="marias"
+                    style={{ borderRadius: "12px" }}
+                    src="https://open.spotify.com/embed/track/1ShRHPAiiIrh0arZbSFmx1?utm_source=generator&theme=0"
+                    width="100%"
+                    height="152"
+                    frameBorder="0"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"
+                  ></iframe>
 
-                <iframe
-                  title="laroi"
-                  style={{ borderRadius: "12px" }}
-                  src="https://open.spotify.com/embed/track/3CJrKExvAP6RCtUR8Cf99P?utm_source=generator&theme=0"
-                  width="100%"
-                  height="152"
-                  frameBorder="0"
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                  loading="lazy"
-                ></iframe>
+                  <iframe
+                    title="laroi"
+                    style={{ borderRadius: "12px" }}
+                    src="https://open.spotify.com/embed/track/3CJrKExvAP6RCtUR8Cf99P?utm_source=generator&theme=0"
+                    width="100%"
+                    height="152"
+                    frameBorder="0"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"
+                  ></iframe>
 
-                <iframe
-                  title="switchfoot"
-                  style={{ borderRadius: "12px" }}
-                  src="https://open.spotify.com/embed/track/0suxuyHvv1GoUdluByrmC0?utm_source=generator&theme=0"
-                  width="100%"
-                  height="152"
-                  frameBorder="0"
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                  loading="lazy"
-                ></iframe>
+                  <iframe
+                    title="switchfoot"
+                    style={{ borderRadius: "12px" }}
+                    src="https://open.spotify.com/embed/track/0suxuyHvv1GoUdluByrmC0?utm_source=generator&theme=0"
+                    width="100%"
+                    height="152"
+                    frameBorder="0"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"
+                  ></iframe>
+                </div>
               </div>
-            </div>
 
-            {/* Coding Fuel Section */}
-            <div className="card">
-              <h2 className="cardTitle">Coding Fuel</h2>
-              <div className="aboutDivider"></div>
-              <div className="spotifyContainer">
-                <YoutubeEmbed />
+              {/* Coding Fuel Section */}
+              <div className="card">
+                <h2 className="cardTitle">Coding Fuel</h2>
+                <div className="aboutDivider"></div>
+                <div className="spotifyContainer">
+                  <YoutubeEmbed />
+                </div>
               </div>
             </div>
           </div>
@@ -175,6 +189,8 @@ const About = () => {
       </div>
     </div>
   );
+
+  //#endregion
 };
 
 export default About;

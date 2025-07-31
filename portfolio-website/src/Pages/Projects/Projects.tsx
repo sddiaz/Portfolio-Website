@@ -170,10 +170,10 @@ const Projects: React.FC = () => {
 
   const categories = [
     { id: "all", label: "All Projects", icon: <Apps /> },
+    { id: "in-progress", label: "In Progress", icon: <HourglassEmpty /> },
     { id: "web", label: "Web Apps", icon: <Web /> },
     { id: "mobile", label: "Mobile", icon: <Apps /> },
     { id: "desktop", label: "Desktop", icon: <Code /> },
-    { id: "in-progress", label: "In Progress", icon: <HourglassEmpty /> },
   ];
 
   // Updated filtering logic to handle multiple categories and in-progress

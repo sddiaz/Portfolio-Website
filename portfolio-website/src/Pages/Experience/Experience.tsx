@@ -39,7 +39,7 @@ const Experience = () => {
     },
     {
       role: "Software Engineer",
-      company: "Ennovar (Wichita State University)",
+      company: "Ennovar",
       dates: "Jan 2023 – May 2023",
       tools: ["React", "TypeScript", "Python", "Django", "SQL"],
       location: "Wichita, KS",
@@ -53,7 +53,7 @@ const Experience = () => {
     },
     {
       role: "Student Technician",
-      company: "National Institute for Aviation Research",
+      company: "NIAR",
       dates: "Feb 2022 – Jan 2023",
       tools: ["C#", ".NET", "SQL"],
       location: "Wichita, KS",

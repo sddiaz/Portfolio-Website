@@ -10,7 +10,7 @@ const AbstractSection = () => {
         in computer engineering, pursuing my Master's in comp sci at
         Georgia Tech. I specialize in building clean, user-focused
         interfaces and bring a strong eye for design through experience in
-        UI/UX and creative technologies.
+        UI/UX and creative technologies. Let's connect if you're of similar interests!
       </p>
     </div>
   );

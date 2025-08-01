@@ -18,7 +18,7 @@ const EarthScene = () => {
         <OrbitControls
           autoRotate
           autoRotateSpeed={0.9}
-          enableZoom
+          enableZoom={false}
           minDistance={80}
           maxDistance={60}
           enableRotate

@@ -8,6 +8,7 @@ import {
   HourglassEmpty,
   InfoOutlined,
   OpenInNew,
+  Block,
 } from "@mui/icons-material";
 import "./ProjectsStyles.css";
 
@@ -16,11 +17,12 @@ interface Project {
   title: string;
   description: string;
   technologies: string[];
-  categories: ("web" | "mobile" | "design" | "desktop")[]; 
+  categories: ("web" | "mobile" | "design" | "desktop")[];
   image?: string;
   githubUrl?: string;
   liveUrl?: string;
   inProgress?: boolean;
+  deprecated?: boolean;
 }
 
 const Projects: React.FC = () => {
@@ -34,24 +36,21 @@ const Projects: React.FC = () => {
   const projects: Project[] = [
     {
       id: 1,
-      title: "EventBuzz",
+      title: "Vizme",
       description:
-        "A lightweight Chrome extension that fetches events from Google Events using SerpAPI. Features event search, favorites with local storage, date sorting, and pagination with a clean React interface.",
+        "An interactive data visualization platform that transforms complex datasets into beautiful, insightful charts and graphs. Built with modern React and D3.js for dynamic, responsive visualizations.",
       technologies: [
         "React",
-        "Axios",
-        "React-Spinners",
-        "Vercel",
-        "CSS",
-        "SerpAPI",
+        "D3.js",
+        "TypeScript",
+        "Node.js",
+        "MongoDB",
+        "Express",
       ],
-      categories: ["web"], 
-      image:
-        "https://github.com/sddiaz/Portfolio/assets/101738608/4745d92b-b1d0-47cb-b719-d5bfe96ca3dc",
+      categories: ["web"],
       githubUrl:
-        "https://github.com/sddiaz/Portfolio/tree/main/EventBuzz%20(Event%20Finder)",
-      liveUrl: "https://eventbuzzz.netlify.app/",
-      inProgress: false,
+        "https://github.com/sddiaz/Portfolio/tree/86fc3f090c506f5fc66c2259fb1541890088c6be/Vizme%20(Algorithms%20and%20Data%20Structures%20Vizualizer)/vizme",
+      inProgress: true,
     },
     {
       id: 2,
@@ -70,29 +69,10 @@ const Projects: React.FC = () => {
       image:
         "https://github.com/user-attachments/assets/5736d62e-74a4-4b69-8e7b-aff18ca11e08",
       githubUrl: "https://github.com/sddiaz/amazon-clone",
-      liveUrl: "https://amazon-clone-lake-pi.vercel.app/",
       inProgress: true,
     },
     {
       id: 3,
-      title: "Vizme",
-      description:
-        "An interactive data visualization platform that transforms complex datasets into beautiful, insightful charts and graphs. Built with modern React and D3.js for dynamic, responsive visualizations.",
-      technologies: [
-        "React",
-        "D3.js",
-        "TypeScript",
-        "Node.js",
-        "MongoDB",
-        "Express",
-      ],
-      categories: ["web"],
-      githubUrl:
-        "https://github.com/sddiaz/Portfolio/tree/86fc3f090c506f5fc66c2259fb1541890088c6be/Vizme%20(Algorithms%20and%20Data%20Structures%20Vizualizer)/vizme",
-      inProgress: true,
-    },
-    {
-      id: 4,
       title: "WiD - Daily Journal App",
       description:
         "A full-stack daily journal application with user authentication and real-time database. Users can create, edit past entries, and maintain a personal journal with a clean, intuitive interface. My largest project to date.",
@@ -111,26 +91,33 @@ const Projects: React.FC = () => {
       inProgress: true,
     },
     {
-      id: 5,
-      title: "Mini Travel Journal",
+      id: 4,
+      title: "EventBuzz",
       description:
-        "A responsive static page built with React to practice component architecture, props, and data mapping. Features a clean design showcasing travel destinations with mobile-friendly layout.",
-      technologies: ["React", "JSX", "CSS"],
-      categories: ["web", "mobile"], 
+        "A lightweight Chrome extension that fetches events from Google Events using SerpAPI. Features event search, favorites with local storage, date sorting, and pagination with a clean React interface.",
+      technologies: [
+        "React",
+        "Axios",
+        "React-Spinners",
+        "Vercel",
+        "CSS",
+        "SerpAPI",
+      ],
+      categories: ["web"],
       image:
-        "https://user-images.githubusercontent.com/101738608/211128167-4807830d-8285-4c0d-9d3c-bca8ef4ca33e.png",
+        "https://github.com/sddiaz/Portfolio/assets/101738608/4745d92b-b1d0-47cb-b719-d5bfe96ca3dc",
       githubUrl:
-        "https://github.com/sddiaz/Portfolio/tree/main/React%20(Tutorial%20Based)/Mini%20Travel%20Journal",
-      liveUrl: "https://minitraveljournal.netlify.app/",
+        "https://github.com/sddiaz/Portfolio/tree/main/EventBuzz%20(Event%20Finder)",
       inProgress: false,
+      deprecated: true,
     },
     {
-      id: 6,
+      id: 5,
       title: "Password Generator",
       description:
         "A feature-rich password generator with focus on UI/UX design. Includes custom switches, reactive sliders, hover effects, infinite carousel, and comprehensive customization options with edge case handling.",
       technologies: ["HTML", "CSS", "JavaScript"],
-      categories: ["web"], 
+      categories: ["web"],
       image:
         "https://user-images.githubusercontent.com/101738608/200132021-1fd026ec-58e9-4883-9014-1e2c5e48c04a.png",
       githubUrl:
@@ -139,12 +126,26 @@ const Projects: React.FC = () => {
       inProgress: false,
     },
     {
+      id: 6,
+      title: "Mini Travel Journal",
+      description:
+        "A responsive static page built with React to practice component architecture, props, and data mapping. Features a clean design showcasing travel destinations with mobile-friendly layout.",
+      technologies: ["React", "JSX", "CSS"],
+      categories: ["web", "mobile"],
+      image:
+        "https://user-images.githubusercontent.com/101738608/211128167-4807830d-8285-4c0d-9d3c-bca8ef4ca33e.png",
+      githubUrl:
+        "https://github.com/sddiaz/Portfolio/tree/main/React%20(Tutorial%20Based)/Mini%20Travel%20Journal",
+      liveUrl: "https://minitraveljournal.netlify.app/",
+      inProgress: false,
+    },
+    {
       id: 7,
       title: "Clippit - Online Clipboard",
       description:
         "A web-based message retrieval system with database integration. Features unique ID generation, error checking, and responsive design. My first personal HTML/CSS project with full-stack capabilities.",
       technologies: ["ASP.NET", "Microsoft SQL", "HTML", "CSS", "C#"],
-      categories: ["web", "mobile"], 
+      categories: ["web", "mobile"],
       image:
         "https://user-images.githubusercontent.com/101738608/197719421-a2647341-fe8b-4753-b377-5989eec35c6c.png",
       githubUrl:
@@ -157,7 +158,7 @@ const Projects: React.FC = () => {
       description:
         "A WPF desktop calculator with dark mode and custom animations. Built from a Dribbble design inspiration, featuring XAML layouts and two-operand functionality. My first major project showcasing UI design skills.",
       technologies: [".NET", "WPF", "C#", "XAML"],
-      categories: ["desktop"], 
+      categories: ["desktop"],
       image:
         "https://user-images.githubusercontent.com/101738608/197716595-29a3c9fe-ef55-44b0-b27d-e248e2e3325e.png",
       githubUrl:
@@ -301,16 +302,13 @@ const Projects: React.FC = () => {
         {/* Projects Grid */}
         <div className="projects-grid">
           {filteredProjects
-            .sort((a, b) => {
-              let isAInProgress = a.inProgress ? 1 : 0;
-              let isBInProgress = b.inProgress ? 1 : 0;
-
-              return isAInProgress - isBInProgress;
-            })
+            .sort((a, b) => a.id - b.id)
             .map((project, index) => (
               <div
                 key={project.id}
-                className={`project-card`}
+                className={`project-card ${
+                  project.deprecated ? "deprecated" : ""
+                }`}
                 onMouseMove={(e) => handleMouseMove(e, project.id)}
                 onMouseLeave={handleMouseLeave}
                 onMouseEnter={() => setHoveredProject(project.id)}
@@ -326,6 +324,14 @@ const Projects: React.FC = () => {
                   <div className="progress-badge">
                     <HourglassEmpty />
                     <span>In Progress</span>
+                  </div>
+                )}
+
+                {/* Deprecated Badge */}
+                {project.deprecated && (
+                  <div className="deprecated-badge">
+                    <Block />
+                    <span>Deprecated</span>
                   </div>
                 )}
 

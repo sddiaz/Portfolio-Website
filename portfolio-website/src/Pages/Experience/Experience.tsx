@@ -1,10 +1,9 @@
 import * as Icon from "devicons-react";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import "../../App.css";
 import "./ExperienceStyles.css";
 
 const Experience = () => {
-  
   //#region Variables
 
   const toolIconMap = {
@@ -69,11 +68,22 @@ const Experience = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobileView, setIsMobileView] = useState(false);
   const [containerHeight, setContainerHeight] = useState("600px");
+  const [expandedCards, setExpandedCards] = useState(new Set());
   const cardsContainerRef = useRef(null);
 
   //#endregion
 
   //#region Functions
+
+  const toggleCard = (index) => {
+    const newExpanded = new Set(expandedCards);
+    if (newExpanded.has(index)) {
+      newExpanded.delete(index);
+    } else {
+      newExpanded.add(index);
+    }
+    setExpandedCards(newExpanded);
+  };
 
   const calculateContainerHeight = useCallback(() => {
     if (!cardsContainerRef.current || isMobileView) return;
@@ -91,17 +101,14 @@ const Experience = () => {
     }
 
     // Add some padding for the stacking effect
-    // Adjust this based on your stacking offset
-    const stackingOffset = (cards.length - 1) * 20; // 20px per card
-    const totalHeight = maxCardHeight + stackingOffset + 50; // 50px extra padding
+    const stackingOffset = (cards.length - 1) * 20;
+    const totalHeight = maxCardHeight + stackingOffset + 50;
 
     setContainerHeight(`${totalHeight}px`);
   }, [isMobileView]);
 
   const getCardStyle = (index) => {
     const position = index - currentIndex;
-
-    // Responsive spacing using clamp() - scales between 50px (mobile) to 120px (desktop)
     const spacing = `clamp(50px, 8vw, 120px)`;
     const doubleSpacing = `clamp(100px, 16vw, 240px)`;
 
@@ -163,12 +170,9 @@ const Experience = () => {
   // Use effect to recalculate on data or view changes
   useEffect(() => {
     calculateContainerHeight();
-
-    // Recalculate on window resize
     const handleResize = () => {
       setTimeout(calculateContainerHeight, 100);
     };
-
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [calculateContainerHeight]);
@@ -178,14 +182,8 @@ const Experience = () => {
     const checkViewport = () => {
       setIsMobileView(window.innerWidth < 1080);
     };
-
-    // Check on mount
     checkViewport();
-
-    // Add resize listener
     window.addEventListener("resize", checkViewport);
-
-    // Cleanup listener on unmount
     return () => window.removeEventListener("resize", checkViewport);
   }, []);
 
@@ -206,77 +204,89 @@ const Experience = () => {
 
           <div className="experience-content">
             {isMobileView ? (
-              // Mobile Layout
-              <div>
-                <div>
-                  {experienceData.map((experience, index) => {
-                    const { role, company, dates, tools, location, notables } =
-                      experience;
+              // Mobile Accordion Layout
+              <div className="mobile-accordion">
+                {experienceData.map((experience, index) => {
+                  const { role, company, dates, tools, location, notables } =
+                    experience;
+                  const isExpanded = expandedCards.has(index);
 
-                    return (
-                      <div className="card" key={index}>
-                        <div className="job-header">
-                          <h2 className="job-title">
-                            <span className="job-role">{role}</span> at{" "}
-                            <span className="job-company">{company}</span> from{" "}
-                            <span className="job-dates">{dates}</span>
-                          </h2>
-                          <div className="job-divider"></div>
+                  return (
+                    <div
+                      className={`accordion-card ${
+                        isExpanded ? "expanded" : ""
+                      }`}
+                      key={index}
+                    >
+                      <div
+                        className="accordion-header"
+                        onClick={() => toggleCard(index)}
+                      >
+                        <div className="accordion-title-section">
+                          <h3 className="accordion-role">{role}</h3>
+                          <div className="accordion-company-date">
+                            <span className="accordion-company">{company}</span>
+                            <span className="accordion-dates">{dates}</span>
+                          </div>
                         </div>
-
-                        <div className="job-details">
-                          <div>
-                            <div className="details-location">
-                              <h3 className="details-title">Tools</h3>
-                              <div className="details-divider"></div>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  gap: "2px",
-                                  flexWrap: "wrap",
-                                }}
-                              >
-                                {tools.map((tool) => {
-                                  const IconComponent = toolIconMap[tool];
-                                  return (
-                                    <div
-                                      className="location-tag"
-                                      title={tool}
-                                      key={tool}
-                                    >
-                                      {IconComponent && <IconComponent />}
-                                    </div>
-                                  );
-                                })}
-                              </div>
-                            </div>
-
-                            <div className="details-location">
-                              <h3 className="details-title">Location</h3>
-                              <div className="details-divider"></div>
-                              <div className="location-tag">{location}</div>
-                            </div>
-                          </div>
-
-                          <div className="details-notables">
-                            <h3 className="details-title">Accomplishments</h3>
-                            <div className="details-divider"></div>
-                            <ul className="notables-list">
-                              {notables.map((notable, index) => (
-                                <li key={index} className="notable-item">
-                                  <span className="notable-bullet">•</span>
-                                  <span className="notable-text">
-                                    {notable}
-                                  </span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
+                        <div className="accordion-toggle">
+                          {isExpanded ? "−" : "+"}
                         </div>
                       </div>
-                    );
-                  })}
-                </div>
+
+                      <div
+                        className={`accordion-content ${
+                          isExpanded ? "expanded" : ""
+                        }`}
+                      >
+                        <div className="accordion-tools">
+                          <h4 className="accordion-section-title">Tools</h4>
+                          <div className="accordion-tools-grid">
+                            {tools.map((tool) => {
+                              const IconComponent = toolIconMap[tool];
+                              return (
+                                <div
+                                  className="accordion-tool-item"
+                                  title={tool}
+                                  key={tool}
+                                >
+                                  {IconComponent && <IconComponent />}
+                                  <span>{tool}</span>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+
+                        <div className="accordion-location">
+                          <h4 className="accordion-section-title">Location</h4>
+                          <div className="accordion-location-tag">
+                            {location}
+                          </div>
+                        </div>
+
+                        <div className="accordion-accomplishments">
+                          <h4 className="accordion-section-title">
+                            Accomplishments
+                          </h4>
+                          <ul className="accordion-accomplishments-list">
+                            {notables.map((notable, noteIndex) => (
+                              <li
+                                key={noteIndex}
+                                className="accordion-accomplishment-item"
+                              >
+                                <span className="accordion-bullet">•</span>
+                                <span className="accordion-accomplishment-text">
+                                  {notable}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             ) : (
               // Desktop Stack Layout
@@ -365,7 +375,6 @@ const Experience = () => {
   );
 
   //#endregion
-
 };
 
 export default Experience;

@@ -8,7 +8,7 @@ import { Diamond } from "react-awesome-shapes/dist/shapes/diamond";
 import EarthScene from "../../Scenes/EarthScene";
 import SatelliteScene from "../../Scenes/SatelliteScene";
 import UfoScene from "../../Scenes/UfoScene";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./TitleStyles.css";
 import "../../App.css";
 
@@ -51,10 +51,10 @@ const particlesConfig = {
   },
   particles: {
     color: {
-      value: ["#62ffdc", "#d062ff", "#1cc99e", "#338573", "#f3f3f3", "#c9d2f5"], // Your CSS color variables
+      value: ["#62ffdc", "#d062ff", "#1cc99e", "#338573", "#f3f3f3", "#c9d2f5"],
     },
     links: {
-      color: "#62ffdc", // Your accent color
+      color: "#62ffdc", 
       distance: 120,
       enable: true,
       opacity: 0.15,
@@ -78,7 +78,7 @@ const particlesConfig = {
         enable: true,
         area: 800,
       },
-      value: 150, // Adjusted for title page size
+      value: 150,
     },
     opacity: {
       value: {
@@ -109,8 +109,6 @@ const particlesConfig = {
         mode: "auto",
       },
     },
-    // Remove potentially unsupported properties
-    // twinkle, rotate, shadow, motion may not be supported in your version
   },
   detectRetina: true,
 };
@@ -134,10 +132,7 @@ const ParticlesBackground = React.memo(() => {
 const Title = () => {
   //#region Variables
 
-  const [initializeParticles, setInitializeParticles] = useState(false);
-  const [programFlip, setProgramFlip] = useState(false);
   const [isHovered, setIsHovering] = useState(false);
-  const composition = useRef(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -149,36 +144,9 @@ const Title = () => {
     setAnchorEl(null);
   };
 
-  const lifeGoals = [
-    { text: "Earn a B.S. in Computer Engineering", completed: true },
-    { text: "Land first Software Engineering role", completed: true },
-    { text: "Publish a polished portfolio website", completed: true },
-    { text: "Travel to 10 countries", completed: false },
-    { text: "M.S. in Computer Science", completed: false },
-    { text: "Achieve Principle Engineer title", completed: false },
-    { text: "Start tech-focused content creation", completed: false },
-    {
-      text: "Get featured or speak at a tech/design conference",
-      completed: false,
-    },
-    { text: "Build a game!!", completed: false },
-    { text: "Marry my girlfriend :D", completed: false },
-  ];
-
-  const nerdFacts = [
-    "I've been video editing since I was 14",
-    "My daily ride is a CBR500R motorcycle",
-    "I love Fujifilm !",
-    "I built a 7,500+ follower Instagram page around video edits in high school",
-    "My dream job title is 'Principle Frontend Engineer'",
-    "I'm happy you read this far",
-  ];
-
   //#endregion
 
   //#region Functions
-
-  const particlesConfigRef = useRef(particlesConfig);
 
   useEffect(() => {
     const handleResize = () => {
@@ -194,16 +162,6 @@ const Title = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [anchorEl]);
-
-  // Initialize particles engine
-  useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      // Load the slim version
-      await loadBasic(engine);
-    }).then(() => {
-      setInitializeParticles(true);
-    });
-  }, []);
 
   const handleProfileClick = () => {
     window.open("https://www.linkedin.com/in/santiagoddiaz", "_blank");
@@ -237,10 +195,6 @@ const Title = () => {
       behavior: "smooth",
     });
     setAnchorEl(null);
-  };
-
-  const handleProgramFlip = () => {
-    setProgramFlip(!programFlip);
   };
 
   //#endregion

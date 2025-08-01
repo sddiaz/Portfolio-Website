@@ -46,7 +46,6 @@
   height: clamp(80px, 12vh, 120px);
   padding: 0 clamp(15px, 3vw, 30px);
   box-sizing: border-box;
-  gap: clamp(10px, 2vw, 20px);
 }
 
 .navComponent {
@@ -136,29 +135,20 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
   font-weight: 600 !important;
   border-radius: clamp(6px, 1.2vw, 12px) !important;
-
-  /* More responsive font sizing */
   font-size: clamp(12px, 2.8vw, 16px) !important;
-
   position: relative !important;
   overflow: hidden !important;
   border: 1px solid rgba(255, 255, 255, 0.12) !important;
   backdrop-filter: blur(12px) !important;
   color: var(--rootBackground-rgb) !important;
   width: calc(100% - clamp(4px, 1vw, 8px)) !important;
-
-  /* More compact padding */
   padding: clamp(8px, 2vw, 14px) clamp(12px, 2.5vw, 18px) !important;
-
   z-index: 1 !important;
   cursor: pointer !important;
   opacity: 0;
   transform: translateY(15px) scale(0.95);
   animation: menuItemStagger 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
-
-  /* More responsive height */
   min-height: clamp(32px, 6vw, 44px) !important;
-
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -631,7 +621,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 300px; /* Fixed width to prevent over-expansion */
+  width: 300px;
   flex-shrink: 0;
   transition: all 0.3s ease;
 }
@@ -846,7 +836,7 @@
     flex-direction: row;
     width: 100vw;
     max-width: 1080px;
-    gap: clamp(10px, 2vw, 40px); /* Responsive gap */
+    gap: clamp(10px, 2vw, 40px); 
   }
 
   .scene--ufo,
@@ -858,12 +848,12 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: clamp(250px, 25vw, 320px); /* Responsive width */
-    max-width: 320px; /* Prevent over-expansion */
+    width: clamp(250px, 25vw, 320px);
+    max-width: 320px; 
   }
 
   .scene--earth {
-    width: clamp(300px, 40vw, 450px); /* Make earth scene responsive too */
+    width: clamp(300px, 40vw, 450px); 
     max-width: 450px;
   }
 }

@@ -10,14 +10,13 @@ import {
   OpenInNew,
 } from "@mui/icons-material";
 import "./ProjectsStyles.css";
-// Removed MUI Tooltip import
 
 interface Project {
   id: number;
   title: string;
   description: string;
   technologies: string[];
-  categories: ("web" | "mobile" | "design" | "desktop")[]; // Changed to array
+  categories: ("web" | "mobile" | "design" | "desktop")[]; 
   image?: string;
   githubUrl?: string;
   liveUrl?: string;
@@ -46,7 +45,7 @@ const Projects: React.FC = () => {
         "CSS",
         "SerpAPI",
       ],
-      categories: ["web"], // Single category
+      categories: ["web"], 
       image:
         "https://github.com/sddiaz/Portfolio/assets/101738608/4745d92b-b1d0-47cb-b719-d5bfe96ca3dc",
       githubUrl:
@@ -117,7 +116,7 @@ const Projects: React.FC = () => {
       description:
         "A responsive static page built with React to practice component architecture, props, and data mapping. Features a clean design showcasing travel destinations with mobile-friendly layout.",
       technologies: ["React", "JSX", "CSS"],
-      categories: ["web", "mobile"], // Multiple categories
+      categories: ["web", "mobile"], 
       image:
         "https://user-images.githubusercontent.com/101738608/211128167-4807830d-8285-4c0d-9d3c-bca8ef4ca33e.png",
       githubUrl:
@@ -131,7 +130,7 @@ const Projects: React.FC = () => {
       description:
         "A feature-rich password generator with focus on UI/UX design. Includes custom switches, reactive sliders, hover effects, infinite carousel, and comprehensive customization options with edge case handling.",
       technologies: ["HTML", "CSS", "JavaScript"],
-      categories: ["web"], // Single category
+      categories: ["web"], 
       image:
         "https://user-images.githubusercontent.com/101738608/200132021-1fd026ec-58e9-4883-9014-1e2c5e48c04a.png",
       githubUrl:
@@ -145,7 +144,7 @@ const Projects: React.FC = () => {
       description:
         "A web-based message retrieval system with database integration. Features unique ID generation, error checking, and responsive design. My first personal HTML/CSS project with full-stack capabilities.",
       technologies: ["ASP.NET", "Microsoft SQL", "HTML", "CSS", "C#"],
-      categories: ["web", "mobile"], // Multiple categories
+      categories: ["web", "mobile"], 
       image:
         "https://user-images.githubusercontent.com/101738608/197719421-a2647341-fe8b-4753-b377-5989eec35c6c.png",
       githubUrl:
@@ -158,7 +157,7 @@ const Projects: React.FC = () => {
       description:
         "A WPF desktop calculator with dark mode and custom animations. Built from a Dribbble design inspiration, featuring XAML layouts and two-operand functionality. My first major project showcasing UI design skills.",
       technologies: [".NET", "WPF", "C#", "XAML"],
-      categories: ["desktop"], // Single category
+      categories: ["desktop"], 
       image:
         "https://user-images.githubusercontent.com/101738608/197716595-29a3c9fe-ef55-44b0-b27d-e248e2e3325e.png",
       githubUrl:
@@ -176,7 +175,7 @@ const Projects: React.FC = () => {
     { id: "desktop", label: "Desktop", icon: <Code /> },
   ];
 
-  // Updated filtering logic to handle multiple categories and in-progress
+  // Filtering logic to handle multiple categories and in-progress
   const filteredProjects =
     selectedCategory === "all"
       ? projects

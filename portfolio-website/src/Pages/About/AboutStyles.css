@@ -3,11 +3,157 @@
    ========================================================================== */
 
 #About {
-  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.aboutMainContainer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.abstractWrapper {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+}
+
+.abstractWrapper .card {
+  width: 100%;
+  max-width: 100%;
+  margin: 10px 20px;
+}
+
+.aboutContainer {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  margin: 10px 20px;
+  max-width: 100%;
+  width: auto;
+}
+
+/* ==========================================================================
+     MOBILE NAVIGATION
+     ========================================================================== */
+
+.mobileNavContainer {
+  max-width: 900px;
+  margin: 20px 0;
+  padding: 0 20px;
+}
+
+.mobileSectionNav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.mobileSectionNav::-webkit-scrollbar {
+  display: none;
+}
+
+.mobileNavButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 12px 8px;
+  min-width: 70px;
+  transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.mobileNavButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.mobileNavButton:hover::before {
+  left: 100%;
+}
+
+.mobileNavButton:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--accent);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.mobileNavButton.active {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--accent);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+.mobileNavButton.active .navIcon {
+  transform: scale(1.2);
+}
+
+.mobileNavButton.active .navLabel {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.navIcon {
+  font-size: 20px;
+  margin-bottom: 4px;
+  transition: all 0.3s ease;
+}
+
+.navLabel {
+  font-size: 11px;
+  color: var(--mainText);
+  font-weight: 500;
+  text-align: center;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.mobileSectionContainer {
+  width: 100%;
+  max-width: 900px;
+}
+
+.desktopContainer {
+  display: block;
 }
 
 /* ==========================================================================
@@ -24,7 +170,7 @@
 
 .flexRow .flexCol {
   flex: 1;
-  max-width: calc(50% - 1rem);
+  max-width: calc(50% - 0.5rem); 
 }
 
 .flexCol {
@@ -388,82 +534,4 @@
 .nerdFact:hover::before {
   color: var(--wildCard);
   transform: scale(1.2);
-}
-
-/* ==========================================================================
-     RESPONSIVE DESIGN - ABOUT SECTION
-     ========================================================================== */
-
-@media (max-width: 1080px) or (max-height: 1079px) {
-  .aboutContainer .flexRow {
-    justify-content: start;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .aboutContainer .flexRow .flexCol {
-    flex: none;
-    max-width: 100%;
-    width: 100%;
-  }
-
-  .aboutLeftColumn,
-  .aboutRightColumn {
-    gap: 25px;
-  }
-
-  .aboutSectionTitle {
-    font-size: clamp(18px, 4vw, 24px);
-  }
-
-  .aboutAbstract {
-    font-size: clamp(12px, 3vw, 16px);
-    text-indent: 0;
-  }
-
-  .goalItem {
-    padding: 12px 15px;
-  }
-
-  .goalText {
-    font-size: clamp(11px, 3vw, 14px);
-  }
-
-  .socialButton {
-    width: 45px;
-    height: 45px;
-  }
-
-  .socialButton svg {
-    font-size: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .aboutLeftColumn,
-  .aboutRightColumn {
-    gap: 20px;
-  }
-
-  .aboutSection {
-    padding: 20px;
-    border-radius: 20px;
-  }
-
-  .aboutSectionTitle {
-    font-size: clamp(16px, 5vw, 20px);
-  }
-
-  .socialsContainer {
-    gap: 15px;
-  }
-
-  .socialButton {
-    width: 40px;
-    height: 40px;
-  }
-
-  .nerdFact {
-    padding: 15px 20px;
-  }
 }

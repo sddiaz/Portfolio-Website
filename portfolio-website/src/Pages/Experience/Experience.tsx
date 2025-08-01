@@ -2,6 +2,7 @@ import * as Icon from "devicons-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import "../../App.css";
 import "./ExperienceStyles.css";
+import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 
 const Experience = () => {
   //#region Variables
@@ -230,7 +231,7 @@ const Experience = () => {
                           </div>
                         </div>
                         <div className="accordion-toggle">
-                          {isExpanded ? "−" : "+"}
+                          {isExpanded ?  <KeyboardArrowUp />: <KeyboardArrowDown />}
                         </div>
                       </div>
 

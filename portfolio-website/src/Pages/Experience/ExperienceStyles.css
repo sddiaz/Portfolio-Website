@@ -496,7 +496,6 @@
   background: var(--accent);
   border-color: var(--accent);
   color: black;
-  transform: rotate(180deg), translateY(-2px);
 }
 
 /* ==========================================================================
